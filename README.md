@@ -8,7 +8,7 @@ leaks, if you want to know how it is all set up and the likes.
 
 ## Requirements
 * To be able to use vi.
-* OS must be Ubuntu or Debian.
+* It is recommended that Linux be used as the operating system.
 
 ## Credits
 [Anna-senpai](https://hackforums.net/showthread.php?tid=5420472)
