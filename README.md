@@ -7,13 +7,8 @@ See "ForumPost.txt" or [ForumPost.md](ForumPost.md) for the post in which it
 leaks, if you want to know how it is all set up and the likes.
 
 ## Requirements
-* gcc
-* golang
-* electric-fence
-* mysql-server
-* mysql-client
-------------------------
 * To be able to use vi.
+* OS must be Ubuntu or Debian.
 
 ## Credits
 [Anna-senpai](https://hackforums.net/showthread.php?tid=5420472)
