@@ -69,14 +69,14 @@ func (this *Admin) Handle() {
 
     this.conn.Write([]byte("\r\n\033[0m"))
     this.conn.Write([]byte("[+] DDOS | Succesfully hijacked connection\r\n"))
-    time.Sleep(250 * time.Millisecond)
+    time.Sleep(200 * time.Millisecond)
     this.conn.Write([]byte("[+] DDOS | Masking connection from utmp+wtmp...\r\n"))
-    time.Sleep(500 * time.Millisecond)
+    time.Sleep(350 * time.Millisecond)
     this.conn.Write([]byte("[+] DDOS | Hiding from netstat...\r\n"))
-    time.Sleep(150 * time.Millisecond)
+    time.Sleep(120 * time.Millisecond)
     this.conn.Write([]byte("[+] DDOS | Removing all traces of LD_PRELOAD...\r\n"))
     for i := 0; i < 4; i++ {
-        time.Sleep(100 * time.Millisecond)
+        time.Sleep(50 * time.Millisecond)
         this.conn.Write([]byte(fmt.Sprintf("[+] DDOS | Wiping env libc.poison.so.%d\r\n", i + 1)))
     }
     this.conn.Write([]byte("[+] DDOS | Setting up virtual terminal...\r\n"))
