@@ -13,6 +13,8 @@ leaks, if you want to know how it is all set up and the likes.
 * mysql-server
 * mysql-client
 
+* To be able to use vi.
+
 ## Credits
 [Anna-senpai](https://hackforums.net/showthread.php?tid=5420472)
 
