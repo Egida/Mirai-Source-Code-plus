@@ -3,9 +3,6 @@ Leaked Linux.Mirai Source Code for Research/IoT Development Purposes
 
 Uploaded for research purposes and so we can develop IoT and such.
 
-See "ForumPost.txt" or [ForumPost.md](ForumPost.md) for the post in which it
-leaks, if you want to know how it is all set up and the likes.
-
 ## Requirements
 * To be able to use vi.
 * It is recommended that Linux be used as the operating system.
