@@ -1,4 +1,4 @@
-# Mirai BotNet is Tashiro
+# Mirai BotNet to Tashiro
 Leaked Linux.Mirai Source Code for Research/IoT Development Purposes
 
 Uploaded for research purposes and so we can develop IoT and such.
