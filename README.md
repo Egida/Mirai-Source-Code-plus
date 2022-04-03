@@ -1,7 +1,9 @@
-# Mirai BotNet
+# Mirai BotNet is Tashiro
 Leaked Linux.Mirai Source Code for Research/IoT Development Purposes
 
 Uploaded for research purposes and so we can develop IoT and such.
+
+Modified from https://github.com/jgamblin/Mirai-Source-Code.
 
 ## Requirements
 * To be able to use vi.
