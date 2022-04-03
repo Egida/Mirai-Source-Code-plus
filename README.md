@@ -98,4 +98,4 @@ Build loader
 # cd ../loader
 # ./build.sh
 ```
-This completes the installation.
+This completes the installation. :)
