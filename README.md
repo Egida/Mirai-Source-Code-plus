@@ -32,10 +32,10 @@ https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt
 # cd Mirai-Source-Code-plus/scripts
 # service mysql start
 ```
-Add users to mysql.(mirai-pass should be a hard-to-crack password.)
+Add users to mysql.
 ```
 # mysql -uroot -proot mirai
-> INSERT INTO users VALUES (NULL, 'anna-senpai', 'mirai-pass', 0, 0, 0, 0, -1, 1, 30, '');
+> INSERT INTO users VALUES (NULL, 'anna-senpai', 'myawesomepassword', 0, 0, 0, 0, -1, 1, 30, '');
 > exit
 # service mysql restart
 ```
