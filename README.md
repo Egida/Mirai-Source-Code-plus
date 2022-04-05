@@ -112,8 +112,6 @@ for Binary in $BINARIES; do
     chmod 777 dvrHelper
     ./dvrHelper
 done
-
-rm -f "
 ```
 Restart Apache2 after saving bins.sh
 ```
