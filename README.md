@@ -22,7 +22,7 @@ The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b
 ## Install
 ```
 # apt-get install git gcc golang electric-fence mysql-server mysql-client
-# git clone https://github.com/jgamblin/Mirai-Source-Code-plus
+# git clone https://github.com/ware255/Mirai-Source-Code-plus.git
 # cd Mirai-Source-Code-plus/scripts
 # service mysql start
 # cat db.sql | mysql -uroot -proot
