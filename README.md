@@ -110,3 +110,6 @@ Build loader
 # ./build.sh
 ```
 This completes the installation. :)
+
+## How to use
+https://programmer.group/mirai-botnet-environment-setup-steps.html
