@@ -49,7 +49,7 @@ Add users to mysql.
 ```
 # cat db.sql | mysql -uroot -proot
 # mysql -uroot -proot
-> INSERT INTO users VALUES (NULL, 'anna-senpai', 'myawesomepassword', 0, 0, 0, 0, -1, 1, 30, '');
+> INSERT INTO users VALUES (NULL, 'mirai-user', 'mirai-pass', 0, 0, 0, 0, -1, 1, 30, '');
 > exit
 # service mysql restart
 ```
@@ -113,3 +113,25 @@ This completes the installation. :)
 
 ## How to use
 https://programmer.group/mirai-botnet-environment-setup-steps.html
+
+```
+# ./debug/cnc
+```
+Open a new winsow.
+```
+# telnet cnc.change.com 23
+```
+username & password
+```
+username: mirai-user
+password: mirai-user
+```
+Open a new winsow.
+```
+# cd mirai/debug
+# sudo ./scanListen
+```
+Open a new winsow.
+```
+# sudo ./mirai.dbg
+```
