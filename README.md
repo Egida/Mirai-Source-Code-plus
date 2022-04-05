@@ -30,7 +30,7 @@ The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b
 ```
 Add users to mysql. 
 ```
-# mysql -uroot -proot mirai
+# mysql -u root -p root mirai
 > INSERT INTO users VALUES (NULL, 'mirai-user', 'mirai-pass', 0, 0, 0, 0, -1, 1, 30, '');
 > exit
 ```
