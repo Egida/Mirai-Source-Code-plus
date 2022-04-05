@@ -36,6 +36,7 @@ Add users to mysql.
 ```
 Cross Compile
 ```
+# chmod +x cross-compile.sh
 # sudo ./cross-compile.sh
 ```
 Enter "n" here.
@@ -76,11 +77,13 @@ Get golang requiremnts
 In mirai folder, run build.sh script
 ```
 # cd ../mirai
+# chmod +x build.sh
 # ./build.sh debug telnet
 ```
 Build loader
 ```
 # cd ../loader
+# chmod +x build.sh
 # ./build.sh
 ```
 This completes the installation. :)
