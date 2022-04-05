@@ -112,6 +112,8 @@ Build loader
 This completes the installation. :)
 
 ## How to use
+※If you are not logged in as root, be sure to add sudo and follow these steps.
+
 https://programmer.group/mirai-botnet-environment-setup-steps.html
 
 ```
@@ -129,9 +131,9 @@ password: mirai-user
 Open a new winsow.
 ```
 # cd mirai/debug
-# sudo ./scanListen
+# ./scanListen
 ```
 Open a new winsow.
 ```
-# sudo ./mirai.dbg
+# ./mirai.dbg
 ```
