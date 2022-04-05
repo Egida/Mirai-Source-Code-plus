@@ -85,10 +85,13 @@ In mirai folder, run build.sh script
 # cd ../mirai
 # chmod +x build.sh
 # ./build.sh debug telnet
+# ./build.sh release telnet
+# cp ../prompt.txt debug
+# cp ../prompt.txt release
+# cd /release
 ```
 Install Apache2 server.
 ```
-# cd ../mirai/debug
 # sudo apt-get install apache2 -y
 # service apache2 start
 # cp mirai.* /var/www/html
