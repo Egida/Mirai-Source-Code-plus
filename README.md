@@ -22,7 +22,7 @@ The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b
 
 ## Install
 
-※If you are not logged in as root, be sure to add sudo and follow the installation instructions below.
+※If you are not logged in as root, be sure to add sudo and follow the installation instructions below.<br />
 ※If you are unable to install the software, please refer to the following URL for installation.
 
 https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt
