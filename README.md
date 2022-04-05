@@ -1,4 +1,16 @@
 # Mirai BotNet to Tashiro
+<!--
+
+  ,～（（((((((～～､
+  (  ＿（（ (((＿　)
+  |/　~^^＼)／^^~ヽ|
+  |　　＿　《　＿   |
+ (|-(_//_)-(_//_)-|）
+  |　　 　厶､　　   |     ／￣￣￣￣￣￣￣￣￣￣￣
+  ＼   ||||||||　／　　＜  Mirai BotNet to Tashiro.
+    ＼_________／       ＼＿＿＿＿＿＿＿＿＿＿＿
+
+-->
 Leaked Linux.Mirai Source Code for Research/IoT Development Purposes
 
 Uploaded for research purposes and so we can develop IoT and such.
