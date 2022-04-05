@@ -35,6 +35,7 @@ https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt
 ```
 Add users to mysql.
 ```
+# cat db.sql | mysql -uroot -proot
 # mysql -uroot -proot mirai
 > INSERT INTO users VALUES (NULL, 'anna-senpai', 'myawesomepassword', 0, 0, 0, 0, -1, 1, 30, '');
 > exit
