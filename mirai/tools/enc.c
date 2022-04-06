@@ -8,7 +8,7 @@ static uint32_t table_key = 0xdeadbeef;
 
 void *x(void *_buf, int len)
 {
-    unsigned char *buf = (char *)_buf, *out = malloc(len);
+    unsigned char *buf = (unsigned char *)_buf, *out = malloc(len);
     //int i;
     uint8_t k1 = table_key & 0xff,
             k2 = (table_key >> 8) & 0xff,
