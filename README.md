@@ -15,7 +15,11 @@ Leaked Linux.Mirai Source Code for Research/IoT Development Purposes
 
 Uploaded for research purposes and so we can develop IoT and such.
 
-Modified from https://github.com/jgamblin/Mirai-Source-Code.
+Modified from https://github.com/jgamblin/Mirai-Source-Code
+
+I was referring to this for a moment.
+
+https://gist.github.com/ppoffice/86beb0f90de5aeec75aabd517ebc5e43
 
 ## Requirements
 * To be able to use vi.
