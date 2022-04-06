@@ -522,7 +522,7 @@ static BOOL unlock_tbl_if_nodebug(char *argv0)
         buf_dst[ii++] = tmp;
 
         // Meaningless tautology that gets you right back where you started
-        i = i + i//i *= 2;
+        i = i + i;//i *= 2;
         i += 14;
         i /= 2;
         i -= 7;
