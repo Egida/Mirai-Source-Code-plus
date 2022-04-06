@@ -19,7 +19,7 @@ Modified from https://github.com/jgamblin/Mirai-Source-Code.
 
 ## Requirements
 * To be able to use vi.
-* Do not run in WSL.
+* Do not run in WSL.(I tried, but I couldn't use mysql or compile it.)
 * It is recommended that Linux be used as the operating system.
 
 ## Credits
