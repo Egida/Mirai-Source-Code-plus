@@ -40,18 +40,18 @@ The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b
 https://programmer.group/mirai-botnet-environment-setup-steps.html
 
 ```
-# apt-get install git gcc golang electric-fence mysql-server mysql-client
+# sudo apt-get install git gcc golang electric-fence mysql-server mysql-client
 # git clone https://github.com/ware255/Mirai-Source-Code-plus.git
 # cd Mirai-Source-Code-plus/scripts
-# service mysql start
+# sudo service mysql start
 ```
 Add users to mysql.
 ```
-# cat db.sql | mysql -uroot -proot
-# mysql -uroot -proot
+# sudo cat db.sql | mysql -uroot -proot
+# sudo mysql -uroot -proot
 > INSERT INTO users VALUES (NULL, 'mirai-user', 'mirai-pass', 0, 0, 0, 0, -1, 1, 30, '');
 > exit
-# service mysql restart
+# sudo service mysql restart
 ```
 Cross Compile
 ```
