@@ -138,5 +138,5 @@ Open a new winsow.
 ```
 Open a new winsow.
 ```
-# ./mirai.dbg
+# sudo ./mirai.dbg
 ```
