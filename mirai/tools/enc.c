@@ -6,7 +6,28 @@
 
 static uint32_t table_key = 0xdeadbeef;
 
-void *x(void *, int);
+void *x(void *_buf, int len)
+{
+    unsigned char *buf = (char *)_buf, *out = malloc(len);
+    //int i;
+    uint8_t k1 = table_key & 0xff,
+            k2 = (table_key >> 8) & 0xff,
+            k3 = (table_key >> 16) & 0xff,
+            k4 = (table_key >> 24) & 0xff;
+
+    for (int i = 0; i < len; i++)
+    {
+        char tmp = buf[i] ^ k1;
+
+        tmp ^= k2;
+        tmp ^= k3;
+        tmp ^= k4;
+
+        out[i] = tmp;
+    }
+
+    return out;
+}
 
 int main(int argc, char **args)
 {
@@ -58,44 +79,24 @@ int main(int argc, char **args)
         else
         {
             printf("Unknown value `%s` for datatype bool!\n", args[2]);
-            return -1;
+            return 1;
         }
         len = sizeof (char);
     }
     else
     {
         printf("Unknown data type `%s`!\n", args[1]);
-        return -1;
+        return 1;
     }
 
     // Yes we are leaking memory, but the program is so
     // short lived that it doesn't really matter...
     printf("XOR'ing %d bytes of data...\n", len);
     data = x(data, len);
-    for (i = 0; i < len; i++)
+    for (i = 0; i < len; i++) {
         printf("\\x%02X", ((unsigned char *)data)[i]);
-    printf("\n");
-}
-
-void *x(void *_buf, int len)
-{
-    unsigned char *buf = (char *)_buf, *out = malloc(len);
-    int i;
-    uint8_t k1 = table_key & 0xff,
-            k2 = (table_key >> 8) & 0xff,
-            k3 = (table_key >> 16) & 0xff,
-            k4 = (table_key >> 24) & 0xff;
-
-    for (i = 0; i < len; i++)
-    {
-        char tmp = buf[i] ^ k1;
-
-        tmp ^= k2;
-        tmp ^= k3;
-        tmp ^= k4;
-
-        out[i] = tmp;
     }
-
-    return out;
+    printf("\n");
+    
+    return 0;
 }
