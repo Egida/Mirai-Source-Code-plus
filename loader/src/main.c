@@ -12,7 +12,21 @@
 #include "headers/binary.h"
 #include "headers/util.h"
 
-static void *stats_thread(void *);
+static void *stats_thread(void *arg)
+{
+    uint32_t seconds = 0;
+
+    while (TRUE)
+    {
+#ifndef DEBUG
+        printf("%ds\tProcessed: %d\tConns: %d\tLogins: %d\tRan: %d\tEchoes:%d Wgets: %d, TFTPs: %d\n",
+               seconds++, ATOMIC_GET(&srv->total_input), ATOMIC_GET(&srv->curr_open), ATOMIC_GET(&srv->total_logins), ATOMIC_GET(&srv->total_successes),
+               ATOMIC_GET(&srv->total_echoes), ATOMIC_GET(&srv->total_wgets), ATOMIC_GET(&srv->total_tftps));
+#endif
+        fflush(stdout);
+        sleep(1);
+    }
+}
 
 static struct server *srv;
 
@@ -96,20 +110,4 @@ int main(int argc, char **args)
         sleep(1);
 
     return 0;
-}
-
-static void *stats_thread(void *arg)
-{
-    uint32_t seconds = 0;
-
-    while (TRUE)
-    {
-#ifndef DEBUG
-        printf("%ds\tProcessed: %d\tConns: %d\tLogins: %d\tRan: %d\tEchoes:%d Wgets: %d, TFTPs: %d\n",
-               seconds++, ATOMIC_GET(&srv->total_input), ATOMIC_GET(&srv->curr_open), ATOMIC_GET(&srv->total_logins), ATOMIC_GET(&srv->total_successes),
-               ATOMIC_GET(&srv->total_echoes), ATOMIC_GET(&srv->total_wgets), ATOMIC_GET(&srv->total_tftps));
-#endif
-        fflush(stdout);
-        sleep(1);
-    }
 }
