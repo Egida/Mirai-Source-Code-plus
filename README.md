@@ -109,7 +109,6 @@ In mirai folder, run build.sh script
 ```
 # cd ../mirai
 # chmod +x build.sh
-# ./build.sh debug telnet
 # ./build.sh release telnet
 ```
 Build loader
@@ -126,7 +125,7 @@ This completes the installation. :)
 https://programmer.group/mirai-botnet-environment-setup-steps.html
 
 ```
-# ./debug/cnc
+# ./release/cnc
 ```
 Open a new winsow.
 ```
