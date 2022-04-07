@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS mirai;
 CREATE DATABASE mirai;
 use mirai;
 CREATE TABLE `history` (
