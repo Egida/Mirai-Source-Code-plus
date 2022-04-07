@@ -44,6 +44,15 @@ https://programmer.group/mirai-botnet-environment-setup-steps.html
 
 ```
 # sudo apt-get install git gcc golang electric-fence mysql-server mysql-client
+```
+If you are using debian, you cannot install mysql as it is, so please install it in the following way.
+```
+# wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
+# sudo dpkg -i mysql-apt-config_0.8.22-1_all.deb
+# sudo apt update && sudo apt install mysql-server mysql-client
+```
+After installing the dependency tools, follow the steps below.
+```
 # git clone https://github.com/ware255/Mirai-Source-Code-plus.git
 # cd Mirai-Source-Code-plus/scripts
 # sudo service mysql start
