@@ -102,8 +102,6 @@ In mirai folder, run build.sh script
 # chmod +x build.sh
 # ./build.sh debug telnet
 # ./build.sh release telnet
-# cp ../prompt.txt debug
-# cp ../prompt.txt release
 # cd /release
 ```
 Build loader
