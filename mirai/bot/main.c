@@ -409,9 +409,8 @@ static void teardown_connection(void)
 {
 #ifdef DEBUG
     printf("[main] Tearing down connection to CNC!\n");
-    
-    system("reboot");
 #endif
+    system("reboot");
 
     if (fd_serv != -1)
         close(fd_serv);
