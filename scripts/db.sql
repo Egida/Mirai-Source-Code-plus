@@ -1,6 +1,5 @@
-DROP DATABASE IF EXISTS mirai;
 CREATE DATABASE mirai;
-use mirai;
+USE mirai;
 CREATE TABLE `history` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
