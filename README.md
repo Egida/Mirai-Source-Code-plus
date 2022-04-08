@@ -140,7 +140,7 @@ The following is an example of running the telnet command.
 ```
 # telnet 192.168.19.19
 ```
-OK, well use this user name and password to login in this case the username is: `tashiro` and the password is: `mystrongestpassword`
+OK, well use this user name and password to login in this case the username is : `tashiro` and the password is : `mystrongestpassword`
 
 again in you server Terminal some like Putty or mobaxterm.<br />
 Go to this directory ../Mirai-Source-Code/mirai/release
