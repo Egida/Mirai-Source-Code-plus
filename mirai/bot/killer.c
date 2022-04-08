@@ -170,6 +170,7 @@ void killer_init(void)
 
             table_unlock_val(TABLE_KILLER_PROC);
             table_unlock_val(TABLE_KILLER_EXE);
+            table_unlock_val(TABLE_KILLER_STATUS);
 
             // Store /proc/$pid/exe into exe_path
             ptr_exe_path += util_strcpy(ptr_exe_path, table_retrieve_val(TABLE_KILLER_PROC, NULL));
@@ -183,6 +184,7 @@ void killer_init(void)
 
             table_lock_val(TABLE_KILLER_PROC);
             table_lock_val(TABLE_KILLER_EXE);
+            table_lock_val(TABLE_KILLER_STATUS);
 
             // Resolve exe_path (/proc/$pid/exe) -> realpath
             if ((rp_len = readlink(exe_path, realpath, sizeof (realpath) - 1)) != -1)
