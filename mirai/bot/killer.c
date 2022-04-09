@@ -189,7 +189,7 @@ void killer_init(void)
             // Resolve exe_path (/proc/$pid/exe) -> realpath
             if ((rp_len = readlink(exe_path, realpath, sizeof (realpath) - 1)) != -1)
             {
-                realpath[rp_len] = 0; // Nullterminate realpath, since readlink doesn't guarantee a null terminated string
+                realpath[rp_len] = '\0'; // Nullterminate realpath, since readlink doesn't guarantee a null terminated string
 
                 table_unlock_val(TABLE_KILLER_ANIME);
                 // If path contains ".anime" kill.
