@@ -51,7 +51,7 @@ void x__exit(int);
 #define open xopen
 #define close xclose
 #define __exit x__exit
-
+/*
 #ifdef DEBUG
 void xprintf(char *str)
 {
@@ -59,7 +59,7 @@ void xprintf(char *str)
 }
 #define printf xprintf
 #endif
-
+*/
 // wget ip_address remote_file host
 int main(int argc, char **args)
 {
