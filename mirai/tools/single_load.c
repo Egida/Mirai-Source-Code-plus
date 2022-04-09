@@ -845,10 +845,10 @@ void *loader(void *threadCount)
             stateTable[fd].special = 0;
             
             token = strsep(&running, ":");
-            strcpy(stateTable[fd].username, token);
+            strncpy(stateTable[fd].username, token, 32);
             
             token = strsep(&running, ":");
-            strcpy(stateTable[fd].password, token);
+            strncpy(stateTable[fd].password, token, 32);
         } else {
             printf("used slot found in loader thread?\n");
         }
