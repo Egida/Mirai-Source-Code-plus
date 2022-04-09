@@ -1,14 +1,38 @@
 # Mirai BotNet to Tashiro(未来砲)
+<!--
 
+  ,～（（((((((～～､
+  (  ＿（（ (((＿　)
+  |/　~^^＼)／^^~ヽ|
+  |　　＿　《　＿   |
+ (|-(_//_)-(_//_)-|）
+  |　　 　厶､　　   |     ／￣￣￣￣￣￣￣￣￣￣￣
+  ＼   ||||||||　／　　＜  Mirai BotNet to Tashiro.
+    ＼_________／       ＼＿＿＿＿＿＿＿＿＿＿＿
+
+-->
 コンパイル方法を少し簡略化し、若干の修正を加えています。
 Mirai BotNet to Tashiroという名前にしていますが、普通に未来砲でいいです。
 
 バグ等などありましたら[@ware255](https://mobile.twitter.com/ware255)まで教えてください。
 
+Modified from https://github.com/jgamblin/Mirai-Source-Code <br />
+ちょっとだけ参考にさせていただきました。<br />
+https://gist.github.com/ppoffice/86beb0f90de5aeec75aabd517ebc5e43
+
 ## 必要条件(注意事項)
 * viを使えるようにすること(別にnanoでもいい)。
 * WSLやWSL2で実行しないでください(試しましたが、mysqlが使えなかったり、コンパイルができなかったりしました)。
 * OSはLinux系のものを使用することを推奨します。
+
+## Credits
+[Anna-senpai](https://hackforums.net/showthread.php?tid=5420472)
+
+## 免責事項
+このリポジトリは研究目的であり、本ソフトウェアの使用はあなたの責任です。
+
+## 警告
+このレポの[zipファイル](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b3b1b0fe7dbbfbf790d5300f3cd54893333/analysis/1477822491/)は、いくつかのAVプログラムによってマルウェアとして認識されています。 ご注意ください。
 
 ## 未来砲のインストール方法
 
