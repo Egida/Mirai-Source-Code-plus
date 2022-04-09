@@ -8,11 +8,11 @@
 struct telnet_info *telnet_info_new(char *user, char *pass, char *arch, ipv4_t addr, port_t port, struct telnet_info *info)
 {
     if (user != NULL)
-        strcpy(info->user, user);
+        strncpy(info->user, user, 32);
     if (pass != NULL)
-        strcpy(info->pass, pass);
+        strncpy(info->pass, pass, 32);
     if (arch != NULL)
-        strcpy(info->arch, arch);
+        strncpy(info->arch, arch, 6);
     info->addr = addr;
     info->port = port;
 
