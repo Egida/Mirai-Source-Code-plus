@@ -124,7 +124,7 @@ static void xvprintf(const char *fmt, va_list arp)
         while (j++ < w) xputc(' ');
     }
 }
-
+/*
 static void xprintf(const char *fmt, ...)
 {
     va_list arp;
@@ -133,6 +133,6 @@ static void xprintf(const char *fmt, ...)
     va_end(arp);
 }
 #define printf xprintf
-
+*/
 #endif
 
