@@ -16,8 +16,8 @@ Mirai BotNet to Tashiroという名前にしていますが、普通に未来砲
 
 バグ等などありましたら[@ware255](https://mobile.twitter.com/ware255)まで教えてください。
 
-Modified from https://github.com/jgamblin/Mirai-Source-Code <br />
-ちょっとだけ参考にさせていただきました。<br />
+https://github.com/jgamblin/Mirai-Source-Code より抜粋<br />
+ちょっとだけ以下のURLを参考にさせていただきました。<br />
 https://gist.github.com/ppoffice/86beb0f90de5aeec75aabd517ebc5e43
 
 ## 必要条件(注意事項)
