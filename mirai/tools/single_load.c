@@ -1009,14 +1009,14 @@ int main(int argc, char *argv[ ])
     {
         printf("\r");
         memset(new, '\0', 16*6);
-        sprintf(new, "%s|%-15lu", new, found_srvs);
-        sprintf(new, "%s|%-15lu", new, timed_out);
-        sprintf(new, "%s|%-15lu", new, failed_connect);
-        sprintf(new, "%s|%-15lu", new, remote_hangup);
-        sprintf(new, "%s|%-15lu", new, login_done);
-        sprintf(new, "%s|%-15d", new, bytes_sent);
-        sprintf(new, "%s|%-15lu", new, getConnectedSockets());
-        sprintf(new, "%s|%-15d", new, running_threads);
+        snprintf(new, sizeof(new), "%s|%-15lu", new, found_srvs);
+        snprintf(new, sizeof(new), "%s|%-15lu", new, timed_out);
+        snprintf(new, sizeof(new), "%s|%-15lu", new, failed_connect);
+        snprintf(new, sizeof(new), "%s|%-15lu", new, remote_hangup);
+        snprintf(new, sizeof(new), "%s|%-15lu", new, login_done);
+        snprintf(new, sizeof(new), "%s|%-15d", new, bytes_sent);
+        snprintf(new, sizeof(new), "%s|%-15lu", new, getConnectedSockets());
+        snprintf(new, sizeof(new), "%s|%-15d", new, running_threads);
         printf("%s", new);
         fflush(stdout);
         bytes_sent=0;
