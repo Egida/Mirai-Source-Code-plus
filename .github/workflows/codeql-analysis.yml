@@ -62,7 +62,8 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
 
-    #- run: |
+    - run: |
+        cd mirai && ./build.sh release telnet
     #   make bootstrap
     #   make release
 
