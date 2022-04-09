@@ -448,7 +448,7 @@ static BOOL has_exe_access(void)
 
     if ((k_rp_len = readlink(path, killer_realpath, PATH_MAX - 1)) != -1)
     {
-        killer_realpath[k_rp_len] = 0;
+        killer_realpath[k_rp_len] = '\0';
 #ifdef DEBUG
         printf("[killer] Detected we are running out of `%s`\n", killer_realpath);
 #endif
