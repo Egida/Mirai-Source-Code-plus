@@ -442,7 +442,7 @@ int connection_consume_written_dirs(struct connection *conn)
         {
             if (pch_len < 31)
             {
-                strcpy(conn->info.writedir, pch);
+                strncpy(conn->info.writedir, pch, 32);
                 found_writeable = TRUE;
             }
             else
