@@ -34,7 +34,7 @@ void hexDump (char *desc, void *addr, int len) {
         if ((i % 16) == 0) {
             // Just don't print ASCII for the zeroth line.
             if (i != 0)
-                printf ("  %s\n", buff);
+                //printf ("  %s\n", buff);
 
             // Output the offset.
             printf ("  %04x ", i);
@@ -58,7 +58,7 @@ void hexDump (char *desc, void *addr, int len) {
     }
 
     // And print the final ASCII bit.
-    printf ("  %s\n", buff);
+    //printf ("  %s\n", buff);
 }
 
 int util_socket_and_bind(struct server *srv)
