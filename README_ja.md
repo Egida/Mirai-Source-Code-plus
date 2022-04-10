@@ -166,7 +166,7 @@ miraiのファイルを`/var/www/html`へコピーします。
 # cd /var/www/html
 # touch bins.sh
 ```
-次に、`bins.sh` を開いて、次のように記述します。
+次に、`bins.sh` を開いて、次のように記述します（`IP OR HOSTNAME:80`のところは自分の持っているvpsのIPか自分のIPアドレスに置き換えてください）。
 ```
 #!/bin/sh
 
