@@ -239,10 +239,10 @@ ipv4_t util_local_addr(void)
 
     errno = 0;
     if ((fd = socket(AF_INET, SOCK_DGRAM, 0)) == -1)
-    {
+    {/*
 #ifdef DEBUG
         printf("[util] Failed to call socket(), errno = %d\n", errno);
-#endif
+#endif*/
         return 0;
     }
 
