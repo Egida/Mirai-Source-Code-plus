@@ -1,8 +1,8 @@
 #define _GNU_SOURCE
-
+/*
 #ifdef DEBUG
 #include <stdio.h>
-#endif
+#endif*/
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
@@ -44,11 +44,11 @@ BOOL attack_init(void)
 void attack_kill_all(void)
 {
     int i;
-
+/*
 #ifdef DEBUG
     printf("[attack] Killing all ongoing attacks\n");
 #endif
-
+*/
     for (i = 0; i < ATTACK_CONCURRENT_MAX; i++)
     {
         if (attack_ongoing[i] != 0)
@@ -176,10 +176,10 @@ void attack_start(int duration, ATTACK_VECTOR vector, uint8_t targs_len, struct 
         for (int i = 0; i < methods_len; i++)
         {
             if (methods[i]->vector == vector)
-            {
+            {/*
 #ifdef DEBUG
                 printf("[attack] Starting attack...\n");
-#endif
+#endif*/
                 methods[i]->func(targs_len, targs, opts_len, opts);
                 break;
             }
