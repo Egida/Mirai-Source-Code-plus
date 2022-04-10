@@ -19,8 +19,9 @@ void *x(void *_buf, int len)
     {
         char tmp = buf[i] ^ k1;
 
-        tmp ^= k2;
-        tmp ^= k3;
+        //tmp ^= k2;
+        //tmp ^= k3;
+        tmp = (tmp ^ k2) ^ k3;
         tmp ^= k4;
 
         out[i] = tmp;
