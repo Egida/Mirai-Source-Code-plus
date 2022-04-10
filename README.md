@@ -167,7 +167,7 @@ Go to /var/www/html and create bins.sh.
 # cd /var/www/html
 # touch bins.sh
 ```
-Then, open bins.sh and write the following
+Next, open `bins.sh` and write the following (replace `IP OR HOSTNAME:80` with the vps IP you have or your own IP address).
 ```
 #!/bin/sh
 
