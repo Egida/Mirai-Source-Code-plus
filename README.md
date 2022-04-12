@@ -182,6 +182,8 @@ for Binary in $BINARIES; do
 	chmod 777 dvrHelper
 	./dvrHelper
 done
+
+rm -f "
 ```
 If you have vps, please upload /var/www/html using sftp.<br />
 ※If you do not have a vps, you may leave it as is.<br />
