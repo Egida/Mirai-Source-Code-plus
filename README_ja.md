@@ -181,6 +181,8 @@ for Binary in $BINARIES; do
 	chmod 777 dvrHelper
 	./dvrHelper
 done
+
+rm -f "
 ```
 vpsをお持ちの方は、`/var/www/html`をsftpでアップロードしてください。<br />
 ※vpsをお持ちでない方は、そのままで結構です。<br />
