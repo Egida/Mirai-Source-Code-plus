@@ -53,7 +53,7 @@ int main(int argc, char **args)
     int tbl_exec_succ_len;
     int pgid, pings = 0;
 
-#ifndef DEBUG
+//#ifndef DEBUG
     sigset_t sigs;
     int wfd;
 
@@ -78,7 +78,7 @@ int main(int argc, char **args)
         wfd = 0;
     }
     chdir("/");
-#endif
+//#endif
 
 #ifdef DEBUG
     //printf("DEBUG MODE YO\n");
