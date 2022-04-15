@@ -118,7 +118,7 @@ const DatabaseTable string  = "mirai"
 ```
 次にmysqlにユーザーを追加します。
 ```
-# cd ../scripts
+# cd ../../scripts
 # sudo mysql -uroot -pMySQL_Password
 > INSERT INTO users VALUES (NULL, 'tashiro', 'mystrongestpassword', 0, 0, 0, 0, -1, 1, 30, '');
 > exit
