@@ -23,6 +23,7 @@ if [ $# == 0 ]; then
 elif [ "$1" == "release" ]; then
     #rm release/mirai.*
     #rm release/miraint.*
+    echo "It takes time to compile, so please wait while having a cup of coffee."
     go build -o release/cnc cnc/*.go
     compile_bot i586 mirai.x86 "$FLAGS -DKILLER_REBIND_SSH -static"
     compile_bot mips mirai.mips "$FLAGS -DKILLER_REBIND_SSH -static"
@@ -47,6 +48,7 @@ elif [ "$1" == "release" ]; then
     compile_bot sh4 miraint.sh4 "-static"
 
     go build -o release/scanListen tools/scanListen.go
+    echo "Compilation is finished."
 elif [ "$1" == "debug" ]; then
     echo "Please note that we have made it impossible to compile with debugging. If you want to compile with debugging, please remove #."
     #gcc -std=c99 bot/*.c -DDEBUG "$FLAGS" -static -g -o debug/mirai.dbg
