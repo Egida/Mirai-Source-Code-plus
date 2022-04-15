@@ -35,7 +35,7 @@ func (this *Admin) Handle() {
 
     // Get username
     this.conn.SetDeadline(time.Now().Add(60 * time.Second))
-    this.conn.Write([]byte("\033[34;1user\033[33;3m: \033[0m"))
+    this.conn.Write([]byte("\033[34;1muser\033[33;3m: \033[0m"))
     username, err := this.ReadLine(false)
     if err != nil {
         return
