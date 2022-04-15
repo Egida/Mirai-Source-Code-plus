@@ -109,7 +109,7 @@ golang の必要条件を取得する。
 ```
 # sudo /usr/bin/mysql_secure_installation
 ```
-`cd cnc/`で移動し、先ほど入力したrootパスワードをMySQL_Passwordから置き換えてください。
+`cd cnc/`で移動し、先ほど入力したrootパスワードをmain.goを開いてMySQL_Passwordから置き換えてください。
 ```
 const DatabaseAddr string   = "127.0.0.1:3306"
 const DatabaseUser string   = "root"
