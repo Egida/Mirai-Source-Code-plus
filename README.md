@@ -110,7 +110,7 @@ Database setup<br />
 ```
 # sudo /usr/bin/mysql_secure_installation
 ```
-Go to `cd cnc/` and replace the root password you just entered with the MySQL_Password.
+Go to `cd cnc/`, open main.go and replace the root password you just entered with MySQL_Password.
 ```
 const DatabaseAddr string   = "127.0.0.1:3306"
 const DatabaseUser string   = "root"
@@ -119,7 +119,7 @@ const DatabaseTable string  = "mirai"
 ```
 Add users to mysql.
 ```
-# cd ../scripts
+# cd ../../scripts
 # sudo mysql -uroot -pMySQL_Password
 > INSERT INTO users VALUES (NULL, 'tashiro', 'mystrongestpassword', 0, 0, 0, 0, -1, 1, 30, '');
 > exit
