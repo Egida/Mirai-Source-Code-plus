@@ -119,9 +119,7 @@ const DatabaseTable string  = "mirai"
 次にmysqlにユーザーを追加します。
 ```
 # cd ../../scripts
-# sudo mysql -uroot -pMySQL_Password
-> INSERT INTO users VALUES (NULL, 'tashiro', 'mystrongestpassword', 0, 0, 0, 0, -1, 1, 30, '');
-> exit
+# cat db.sql | sudo mysql -uroot -pMySQL_Password
 # sudo service mysql restart
 ```
 mysqlサーバーを再起動したら、リリースディレクトリ(`./mirai/release`)に移動し、cncというコンパイルされたファイルを実行します。
