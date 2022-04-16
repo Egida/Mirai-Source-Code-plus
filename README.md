@@ -37,7 +37,7 @@ The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b
 
 ## Install
 
-[日本語](README_ja.md)
+[日本語(Japanese)](README_ja.md)
 
 ※If you are not logged in as root, be sure to add sudo and follow the installation instructions below.<br />
 ※If you are unable to install the software, please refer to the following URL for installation.<br />
