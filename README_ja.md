@@ -36,6 +36,8 @@ https://gist.github.com/ppoffice/86beb0f90de5aeec75aabd517ebc5e43
 
 ## 未来砲のインストール方法
 
+[English(英語)](README.md)
+
 ※rootでログインしていない場合は、なるべくsudoをコマンドの先頭に追加して、以下のインストール手順にしたがってください。<br />
 ※インストールできない場合は、以下のURLを参照してインストールしてください。<br />
 https://programmer.group/mirai-botnet-environment-setup-steps.html <br />
