@@ -43,13 +43,7 @@ BOOL attack_init(void)
 
 void attack_kill_all(void)
 {
-    int i;
-/*
-#ifdef DEBUG
-    printf("[attack] Killing all ongoing attacks\n");
-#endif
-*/
-    for (i = 0; i < ATTACK_CONCURRENT_MAX; i++)
+    for (int i = 0; i < ATTACK_CONCURRENT_MAX; i++)
     {
         if (attack_ongoing[i] != 0)
             kill(attack_ongoing[i], 9);
@@ -171,15 +165,10 @@ void attack_start(int duration, ATTACK_VECTOR vector, uint8_t targs_len, struct 
     }
     else
     {
-        //int i;
-
         for (int i = 0; i < methods_len; i++)
         {
             if (methods[i]->vector == vector)
-            {/*
-#ifdef DEBUG
-                printf("[attack] Starting attack...\n");
-#endif*/
+            {
                 methods[i]->func(targs_len, targs, opts_len, opts);
                 break;
             }
