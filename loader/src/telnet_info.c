@@ -22,7 +22,7 @@ struct telnet_info *telnet_info_new(char *user, char *pass, char *arch, ipv4_t a
         }
         else {
             strncpy(info->pass, pass, 32);
-            user[31] = '\0';
+            pass[31] = '\0';
         }
     }
     if (arch != NULL) {
@@ -30,8 +30,8 @@ struct telnet_info *telnet_info_new(char *user, char *pass, char *arch, ipv4_t a
             strncpy(info->arch, arch, 6);
         }
         else {
-            strncpy(info->arch, arch, 32);
-            user[31] = '\0';
+            strncpy(info->arch, arch, 6);
+            arch[5] = '\0';
         }
     }
     info->addr = addr;
