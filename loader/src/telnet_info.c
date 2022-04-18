@@ -7,12 +7,21 @@
 
 struct telnet_info *telnet_info_new(char *user, char *pass, char *arch, ipv4_t addr, port_t port, struct telnet_info *info)
 {
-    if (user != NULL)
-        strncpy(info->user, user, 32);
-    if (pass != NULL)
-        strncpy(info->pass, pass, 32);
-    if (arch != NULL)
-        strncpy(info->arch, arch, 6);
+    if (user != NULL) {
+        if (strlen(user) < 32) {
+            strncpy(info->user, user, 32);
+        }
+    }
+    if (pass != NULL) {
+        if (strlen(pass) < 32) {
+            strncpy(info->pass, pass, 32);
+        }
+    }
+    if (arch != NULL) {
+        if (strlen(arch) < 6) {
+            strncpy(info->arch, arch, 6);
+        }
+    }
     info->addr = addr;
     info->port = port;
 
