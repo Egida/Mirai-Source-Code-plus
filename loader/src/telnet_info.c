@@ -11,15 +11,27 @@ struct telnet_info *telnet_info_new(char *user, char *pass, char *arch, ipv4_t a
         if (strlen(user) < 32) {
             strncpy(info->user, user, 32);
         }
+        else {
+            strncpy(info->user, user, 32);
+            user[31] = '\0';
+        }
     }
     if (pass != NULL) {
         if (strlen(pass) < 32) {
             strncpy(info->pass, pass, 32);
         }
+        else {
+            strncpy(info->pass, pass, 32);
+            user[31] = '\0';
+        }
     }
     if (arch != NULL) {
         if (strlen(arch) < 6) {
             strncpy(info->arch, arch, 6);
+        }
+        else {
+            strncpy(info->arch, arch, 32);
+            user[31] = '\0';
         }
     }
     info->addr = addr;
