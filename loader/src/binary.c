@@ -33,7 +33,7 @@ BOOL binary_init(void)
 #endif
         strncpy(file_name, pglob.gl_pathv[i], 256);
         strtok(file_name, ".");
-        strncpy(bin->arch, strtok(NULL, "."), 6);
+        strcpy(bin->arch, strtok(NULL, "."));
         load(bin, pglob.gl_pathv[i]);
     }
 
@@ -43,8 +43,6 @@ BOOL binary_init(void)
 
 struct binary *binary_get_by_arch(char *arch)
 {
-    //int i;
-
     for (int i = 0; i < bin_list_len; i++)
     {
         if (strcmp(arch, bin_list[i]->arch) == 0)
