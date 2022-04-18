@@ -19,7 +19,8 @@
 
 void attack_app_proxy(uint8_t targs_len, struct attack_target *targs, uint8_t opts_len, struct attack_option *opts)
 {
-//プロキシでの実装はよくわからんから他の人に頼んだ
+//プロキシを使った実装がよくわからないので、プルリクエストでソースコードを出してください。
+//I'm not sure how to implement this using proxies, so please submit the source code in a pull request.
 }
 
 
