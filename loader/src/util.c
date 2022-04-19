@@ -91,7 +91,7 @@ int util_socket_and_bind(struct server *srv)
     }
     if (!bound)
     {
-        close(fd);
+        pclose(fd);
 #ifdef DEBUG
         printf("Failed to bind on any address\n");
 #endif
