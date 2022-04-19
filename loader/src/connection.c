@@ -70,7 +70,7 @@ void connection_close(struct connection *conn)
 
     if (conn->fd != -1)
     {
-        close(conn->fd);
+        pclose(conn->fd);
         conn->fd = -1;
         ATOMIC_DEC(&conn->srv->curr_open);
     }
