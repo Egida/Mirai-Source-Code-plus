@@ -21,13 +21,13 @@ void rand_init(void)
 uint32_t rand_next(void) //period 2^96-1
 {
     uint32_t t = x;
-    //t ^= t << 11;
-    //t ^= t >> 8;
-    t ^= (t ^ t << 11) >> 8;
+    t ^= t << 11;
+    t ^= t >> 8;
+    //t ^= (t ^ t << 11) >> 8;
     x = y; y = z; z = w;
-    //w ^= w >> 19;
-    //w ^= t;
-    w = (w ^ w >> 19) ^ t;
+    w ^= w >> 19;
+    w ^= t;
+    //w = (w ^ w >> 19) ^ t;
     return w;
 }
 
