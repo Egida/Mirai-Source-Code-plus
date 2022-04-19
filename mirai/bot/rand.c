@@ -8,7 +8,7 @@
 #include "includes.h"
 #include "rand.h"
 
-//Xorshift96 (pseudorandom number algorithm)
+//Xorshift (pseudorandom number algorithm)
 static uint32_t x, y, z, w;
 
 void rand_init(void)
