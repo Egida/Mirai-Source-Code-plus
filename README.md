@@ -208,8 +208,8 @@ Thank you for your hard work. Take a break and have a cup of coffee or something
 
 ## References
 
-https://github.com/jgamblin/Mirai-Source-Code
-https://programmer.group/mirai-botnet-environment-setup-steps.html
-https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt
+https://github.com/jgamblin/Mirai-Source-Code <br />
+https://programmer.group/mirai-botnet-environment-setup-steps.html <br />
+https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt <br />
 
 The translation in English is DeepL, but there are some funny parts, so please be warm there.
