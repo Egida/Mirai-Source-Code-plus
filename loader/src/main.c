@@ -12,6 +12,10 @@
 #include "headers/binary.h"
 #include "headers/util.h"
 
+static struct server *srv;
+
+char *id_tag = "telnet";
+
 static void *stats_thread(void *arg)
 {
     uint32_t seconds = 0;
@@ -27,10 +31,6 @@ static void *stats_thread(void *arg)
         sleep(1);
     }
 }
-
-static struct server *srv;
-
-char *id_tag = "telnet";
 
 int main(int argc, char **args)
 {
