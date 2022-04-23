@@ -7,7 +7,7 @@
   |　　＿　《　＿   |
  (|-(_//_)-(_//_)-|）
   |　　 　厶､　　   |     ／￣￣￣￣￣￣￣￣￣￣￣
-  ＼   ||||||||　／　　＜  Mirai BotNet to Tashiro.
+  ＼   ||||||||　／　　＜  ミニにタコ
     ＼_________／       ＼＿＿＿＿＿＿＿＿＿＿＿
 
 -->
@@ -142,9 +142,9 @@ mysqlサーバーを再起動したら、リリースディレクトリ(`./mirai
 OK、ではこのユーザー名とパスワードでログインしてください。この場合、ユーザー名は `tashiro` で、パスワードは `mystrongestpassword` です。
 
 もう一度、Puttyやmobaxtermのようなサーバーターミナルを使用してください。<br />
-このディレクトリに移動します ../Mirai-Source-Code/mirai/release
+このディレクトリに移動します ../Mirai-Source-Code-plus/mirai/release
 ```
-# cd ./Mirai-Source-Code-plus/mirai/release
+# cd Mirai-Source-Code-plus/mirai/release
 ```
 次に、Apacheサーバーをインストールし、起動します。
 ```
