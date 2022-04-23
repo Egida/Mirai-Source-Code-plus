@@ -91,16 +91,16 @@ export GOPATH=$HOME/go
 # mkdir ~/go
 # source ~/.bashrc
 ```
+golang の必要条件を取得する。
+```
+# go get github.com/go-sql-driver/mysql
+# go get github.com/mattn/go-shellwords
+```
 miraiディレクトリに移動して、`build.sh`を実行します。
 ```
 # cd ../mirai
 # chmod +x build.sh
 # ./build.sh release telnet
-```
-golang の必要条件を取得する。
-```
-# go get github.com/go-sql-driver/mysql
-# go get github.com/mattn/go-shellwords
 ```
 `iptbales/ip6tables`やファイアウォールをインストールしている場合は、無効にしてください。
 ```
