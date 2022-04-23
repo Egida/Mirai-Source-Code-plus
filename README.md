@@ -92,16 +92,16 @@ After adding and saving, enter the following command
 # mkdir ~/go
 # source ~/.bashrc
 ```
+Get golang requiremnts
+```
+# go get github.com/go-sql-driver/mysql
+# go get github.com/mattn/go-shellwords
+```
 In mirai folder, run build.sh script
 ```
 # cd ../mirai
 # chmod +x build.sh
 # ./build.sh release telnet
-```
-Get golang requiremnts
-```
-# go get github.com/go-sql-driver/mysql
-# go get github.com/mattn/go-shellwords
 ```
 If you have iptbales/ip6tables or any firewall install disable it.
 ```
