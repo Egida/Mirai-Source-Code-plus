@@ -145,7 +145,7 @@ OK, well use this user name and password to login in this case the username is :
 again in you server Terminal some like Putty or mobaxterm.<br />
 Go to this directory ../Mirai-Source-Code/mirai/release
 ```
-# cd ./Mirai-Source-Code/mirai/release
+# cd Mirai-Source-Code-plus/mirai/release
 ```
 Next, install and start the Apache server.
 ```
