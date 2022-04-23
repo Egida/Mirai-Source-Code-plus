@@ -143,7 +143,7 @@ The following is an example of running the telnet command.
 OK, well use this user name and password to login in this case the username is : `tashiro` and the password is : `mystrongestpassword`
 
 again in you server Terminal some like Putty or mobaxterm.<br />
-Go to this directory ../Mirai-Source-Code/mirai/release
+Go to this directory ../Mirai-Source-Code-plus/mirai/release
 ```
 # cd Mirai-Source-Code-plus/mirai/release
 ```
