@@ -144,7 +144,7 @@ OK、ではこのユーザー名とパスワードでログインしてくださ
 もう一度、Puttyやmobaxtermのようなサーバーターミナルを使用してください。<br />
 このディレクトリに移動します ../Mirai-Source-Code/mirai/release
 ```
-# cd ./Mirai-Source-Code/mirai/release
+# cd ./Mirai-Source-Code-plus/mirai/release
 ```
 次に、Apacheサーバーをインストールし、起動します。
 ```
