@@ -1,5 +1,5 @@
 CREATE DATABASE mirai;
-use mirai;
+USE mirai;
 CREATE TABLE `history` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` int(10) unsigned NOT NULL,
@@ -35,6 +35,4 @@ CREATE TABLE `whitelist` (
   KEY `prefix` (`prefix`)
 );
 
-INSERT INTO users VALUES (NULL, 'tashiro', 'mystrongestpassword', 0, 0, 0, 0, -1, 1, 30, '');
-
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password';
+INSERT INTO users VALUES (NULL, 'root', 'mystrongestpassword', 0, 0, 0, 0, -1, 1, 30, '');
