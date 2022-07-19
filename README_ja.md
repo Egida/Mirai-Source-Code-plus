@@ -108,7 +108,7 @@ miraiディレクトリに移動して、`build.sh`を実行します。
 ```
 # sudo service iptables stop
 ```
-データベースの設定！<br>
+**データベースの設定！** <br>
 次にmysqlにユーザーとテーブルを追加します。
 ```
 # cd release
