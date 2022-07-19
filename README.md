@@ -178,6 +178,7 @@ The following is an example of running the telnet command.
 OK, well use this user name and password to login in this case the username is : `tashiro` and the password is : `mystrongestpassword`<br><br>
 Open a new prompt again and install and start Apache2.
 ```
+# cd ~/Mirai-Source-Code-plus/mirai/release
 # sudo apt install apache2
 # sudo service apache2 start
 ```
