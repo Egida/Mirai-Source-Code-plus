@@ -177,6 +177,7 @@ mysqlサーバを再起動した後、botを再度コンパイルし、release�
 OK、ではこのユーザー名とパスワードでログインしてください。この場合、ユーザー名は `tashiro` で、パスワードは `mystrongestpassword` です。<br><br>
 再度新しいプロンプトを開き、Apache2をインストールし、起動します。
 ```
+# cd ~/Mirai-Source-Code-plus/mirai/release
 # sudo apt install apache2
 # sudo service apache2 start
 ```
