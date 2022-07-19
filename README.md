@@ -17,7 +17,7 @@ Uploaded for research purposes and so we can develop IoT and such.
 
 Modified from https://github.com/jgamblin/Mirai-Source-Code
 
-I was referring to this for a moment.<br />
+I was referring to this for a moment.<br>
 https://gist.github.com/ppoffice/86beb0f90de5aeec75aabd517ebc5e43
 
 ## Requirements
@@ -109,7 +109,7 @@ If you have iptbales/ip6tables or any firewall install disable it.
 ```
 # sudo service iptables stop
 ```
-Database setup<br>
+**Database setup** <br>
 Add users to mysql.
 ```
 # cd release
