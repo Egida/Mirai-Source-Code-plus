@@ -52,7 +52,7 @@ https://www.youtube.com/watch?v=nz_6ayGosxo <br>
 If you are using debian, you cannot install mysql as it is, so please install it in the following way.
 ```
 # wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb
-# sudo dpkg -i mysql-apt-config_0.8.22-1_all.deb
+# sudo apt install ./mysql-apt-config_0.8.22-1_all.deb
 # sudo apt update && sudo apt install mysql-server mysql-client
 ```
 After installing the dependency tools, follow the steps below.
